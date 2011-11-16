@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the EmailReplyParser package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace EmailReplyParser;
 
 /**
@@ -26,6 +34,11 @@ class Fragment
      * @var boolean
      */
     protected $isQuoted = false;
+
+    /**
+     * @var string
+     */
+    protected $content = null;
 
     /**
      * @param string $firstLine
@@ -103,7 +116,11 @@ class Fragment
      */
     public function getContent()
     {
-        return preg_replace("/^\n/", '', strrev(implode("\n", $this->lines)));
+        if (null === $this->content) {
+            $this->content = preg_replace("/^\n/", '', strrev(implode("\n", $this->lines)));
+        }
+
+        return $this->content;
     }
 
     /**
