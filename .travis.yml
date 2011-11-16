@@ -1,10 +1,12 @@
 language: php
 
-php: 5.3
+php:
+    - 5.3
+    - 5.4
 
 before_script:
-- ./bin/install_vendors.sh
+    - ./bin/install_vendors.sh
 
 notifications:
-  email:
-    - william.durand1@gmail.com
+    email:
+        - william.durand1@gmail.com
