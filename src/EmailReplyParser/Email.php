@@ -41,7 +41,7 @@ class Email
             $isQuoted = preg_match('/(>+)$/', $line) ? true : false;
 
             if (null !== $fragment && empty($line)) {
-                if (preg_match('/[\-\_]$/', $fragment->getLastLine())) {
+                if (preg_match('/(--+|_+|\w-)$/', $fragment->getLastLine())) {
                     $fragment->setIsSignature(true);
 
                     if (!$foundVisible) {

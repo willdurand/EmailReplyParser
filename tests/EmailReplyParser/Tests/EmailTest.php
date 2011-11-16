@@ -99,4 +99,11 @@ I am currently using the Java HTTP API.\n", (string)$reply[0]);
 
         $this->assertEquals('The Quick Brown Fox Jumps Over The Lazy Dog', $input);
     }
+
+    public function testComplexBodyWithOnlyOneFragment()
+    {
+        $reply = $this->email->read(file_get_contents(__DIR__.'/../../Fixtures/email_5.txt'));
+
+        $this->assertEquals(1, count($reply));
+    }
 }
