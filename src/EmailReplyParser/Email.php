@@ -28,13 +28,17 @@ class Email
      */
     public function read($text)
     {
-        $array = explode("\n", strrev($text));
+        if (preg_match('/^(On(.+)wrote:)$/ms', $text, $matches)) {
+            $text = str_replace($matches[1], str_replace("\n", ' ', $matches[1]), $text);
+        }
+
+        $lines = explode("\n", strrev($text));
 
         $fragment = null;
         $isQuoted = false;
         $foundVisible = false;
 
-        foreach ($array as $line) {
+        foreach ($lines as $line) {
             $line = preg_replace("/\n$/", '', ltrim($line));
 
             // isQuoted ?

@@ -5,8 +5,7 @@ php:
     - 5.4
 
 before_script:
-    - ./bin/install_vendors.sh
+    - curl -s http://getcomposer.org/installer | php
+    - php composer.phar --dev install
 
-notifications:
-    email:
-        - william.durand1@gmail.com
+script: phpunit --coverage-text

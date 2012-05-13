@@ -106,4 +106,13 @@ I am currently using the Java HTTP API.\n", (string)$reply[0]);
 
         $this->assertEquals(1, count($reply));
     }
+
+    public function testDealsWithMultilineReplyHeaders()
+    {
+        $reply = $this->email->read(file_get_contents(__DIR__.'/../../Fixtures/email_6.txt'));
+
+        $this->assertRegExp('/^I get/', (string)$reply[0]);
+        $this->assertRegExp('/^On/', (string)$reply[1]);
+        $this->assertRegExp('/Was this/', (string)$reply[1]);
+    }
 }

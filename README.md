@@ -3,14 +3,16 @@ EmailReplyParser
 
 [![Build Status](https://secure.travis-ci.org/willdurand/EmailReplyParser.png)](http://travis-ci.org/willdurand/EmailReplyParser)
 
-**EmailReplyParser** is a port of the GitHub's [EmailReplyParser](http://github.com/github/email_reply_parser) library written in Ruby.
-This is a small PHP 5.3 library to parse plain text email content.
+**EmailReplyParser** is a port of the GitHub's [EmailReplyParser](http://github.com/github/email_reply_parser)
+library written in Ruby. This is a small PHP 5.3 library to parse plain text
+email content.
 
 
 Installation
 ------------
 
-If you don't use a _ClassLoader_ in your application, just require the provided autoloader:
+If you don't use a _ClassLoader_ in your application, just require the provided
+autoloader:
 
 ``` php
 <?php
@@ -42,9 +44,11 @@ Alternatively, you can use the static way:
 $reply = \EmailReplyParser\EmailReplyParser::read($emailContent);
 ```
 
-`$reply` is an array of `Fragment` objects. To get the content of each fragment, just call the `getContent()` method.
+`$reply` is an array of `Fragment` objects. To get the content of each fragment,
+just call the `getContent()` method.
 
-A `Fragment` can be a signature, a quoted text, or an hidden text. Here is the API:
+A `Fragment` can be a signature, a quoted text, or an hidden text.
+Here is the API:
 
 ``` php
 <?php
@@ -96,7 +100,7 @@ signatures:
 
     Hello
 
-    -- 
+    --
     Rick
 
 Not everyone follows this convention:
@@ -131,13 +135,13 @@ Apparently, prefixing lines with `>` isn't universal either:
 Unit Tests
 ----------
 
-To run unit tests, you'll need a set of dependencies you can install by running the `install_vendors.sh` script:
+To run the test suite, run Composer first to setup the autoloader:
 
 ```
-./bin/install_vendors.sh
+php composer.phar install
 ```
 
-Once installed, just launch the following command:
+Then run the following command:
 
 ```
 phpunit
@@ -154,4 +158,5 @@ Credits
 License
 -------
 
-EmailReplyParser is released under the MIT License. See the bundled LICENSE file for details.
+EmailReplyParser is released under the MIT License.
+See the bundled LICENSE file for details.
