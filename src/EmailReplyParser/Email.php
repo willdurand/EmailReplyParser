@@ -45,7 +45,7 @@ class Email
             $isQuoted = preg_match('/(>+)$/', $line) ? true : false;
 
             if (null !== $fragment && empty($line)) {
-                if (preg_match('/(--+|_+|\w-)$/', $fragment->getLastLine())) {
+                if (preg_match('/(--|__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/', $fragment->getLastLine())) {
                     $fragment->setIsSignature(true);
 
                     if (!$foundVisible) {
@@ -104,5 +104,17 @@ class Email
     public function getFragments()
     {
         return $this->fragments;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVisibleText()
+    {
+        $visibleFragments = array_filter($this->getFragments(), function($fragment) {
+            return !$fragment->isHidden();
+        });
+
+        return rtrim(implode("\n", $visibleFragments));
     }
 }

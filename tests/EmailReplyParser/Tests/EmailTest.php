@@ -3,6 +3,7 @@
 namespace EmailReplyParser\Tests;
 
 use EmailReplyParser\Email;
+use EmailReplyParser\EmailReplyParser;
 
 class EmailTest extends TestCase
 {
@@ -114,5 +115,37 @@ I am currently using the Java HTTP API.\n", (string)$reply[0]);
         $this->assertRegExp('/^I get/', (string)$reply[0]);
         $this->assertRegExp('/^On/', (string)$reply[1]);
         $this->assertRegExp('/Was this/', (string)$reply[1]);
+    }
+
+    public function testGetVisibleTextReturnsOnlyVisibleFragments()
+    {
+        $reply = $this->email->read(file_get_contents(__DIR__.'/../../Fixtures/email_2.txt'));
+        $visibleFragments = array_filter($reply, function($fragment) {
+            return !$fragment->isHidden();
+        });
+
+        $this->assertEquals(rtrim(implode("\n", $visibleFragments)), $this->email->getVisibleText());
+    }
+
+    public function testParseReply()
+    {
+        $body = file_get_contents(__DIR__.'/../../Fixtures/email_2.txt');
+        $this->email->read($body);
+
+        $this->assertEquals($this->email->getVisibleText(), EmailReplyParser::parseReply($body));
+    }
+
+    public function testParseOutSentFromIPhone()
+    {
+        $body = file_get_contents(__DIR__.'/../../Fixtures/email_iphone.txt');
+
+        $this->assertEquals('Here is another email', EmailReplyParser::parseReply($body));
+    }
+
+    public function testParseOutSentFromBlackBerry()
+    {
+        $body = file_get_contents(__DIR__.'/../../Fixtures/email_blackberry.txt');
+
+        $this->assertEquals('Here is another email', EmailReplyParser::parseReply($body));
     }
 }
