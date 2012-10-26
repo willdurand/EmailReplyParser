@@ -23,7 +23,7 @@ class Email
     /**
      * Read a text which represents an email and splits it into fragments.
      *
-     * @param string $text  A text.
+     * @param  string $text A text.
      * @return array
      */
     public function read($text)
@@ -93,6 +93,7 @@ class Email
         }
 
         $this->fragments = array_reverse($this->fragments);
+
         return $this->fragments;
     }
 

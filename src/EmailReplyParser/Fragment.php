@@ -41,7 +41,7 @@ class Fragment
     protected $content = null;
 
     /**
-     * @param string $firstLine
+     * @param string  $firstLine
      * @param boolean $quoted
      */
     public function __construct($firstLine, $quoted = false)

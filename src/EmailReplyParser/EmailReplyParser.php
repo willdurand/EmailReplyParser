@@ -18,20 +18,21 @@ class EmailReplyParser
     /**
      * Static method for convenient usage.
      *
-     * @param string $text  An email as text.
+     * @param  string $text An email as text.
      * @return array
      */
-    static public function read($text)
+    public static function read($text)
     {
         $email = new Email();
+
         return $email->read($text);
     }
 
     /**
-     * @param string $text  An email as text.
+     * @param  string $text An email as text.
      * @return string
      */
-    static public function parseReply($text)
+    public static function parseReply($text)
     {
         $email = new Email();
         $email->read($text);
