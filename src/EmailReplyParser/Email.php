@@ -15,6 +15,8 @@ namespace EmailReplyParser;
  */
 class Email
 {
+    const SIG_REGEX = '/(--|__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
+
     /**
      * @var array
      */
@@ -28,7 +30,9 @@ class Email
      */
     public function read($text)
     {
-        if (preg_match('/^(On(.+)wrote:)$/ms', $text, $matches)) {
+        $text = str_replace("\r\n", "\n", $text);
+
+        if (preg_match('/^(On\s(.+)wrote:)$/ms', $text, $matches)) {
             $text = str_replace($matches[1], str_replace("\n", ' ', $matches[1]), $text);
         }
 
@@ -39,13 +43,17 @@ class Email
         $foundVisible = false;
 
         foreach ($lines as $line) {
-            $line = preg_replace("/\n$/", '', ltrim($line));
+            $line = preg_replace("/\n$/", '', $line);
+
+            if (!preg_match(self::SIG_REGEX, $line)) {
+                $line = ltrim($line);
+            }
 
             // isQuoted ?
-            $isQuoted = preg_match('/(>+)$/', $line) ? true : false;
+            $isQuoted = preg_match('/(>+)$/s', $line) ? true : false;
 
             if (null !== $fragment && empty($line)) {
-                if (preg_match('/(--|__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/', $fragment->getLastLine())) {
+                if (preg_match(self::SIG_REGEX, $fragment->getLastLine())) {
                     $fragment->setIsSignature(true);
 
                     if (!$foundVisible) {
@@ -61,7 +69,10 @@ class Email
                 }
             }
 
-            if (null !== $fragment && (($isQuoted === $fragment->isQuoted()) || preg_match('/^:etorw.*nO$/', $line) || empty($line))) {
+            if (null !== $fragment &&
+                (($isQuoted === $fragment->isQuoted()) ||
+                ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line))))
+            ) {
                 $fragment->addLine($line);
             } else {
                 if (null !== $fragment) {
@@ -117,5 +128,10 @@ class Email
         });
 
         return rtrim(implode("\n", $visibleFragments));
+    }
+
+    private function isQuoteHeader($line)
+    {
+        return preg_match('/^:etorw.*nO$/s', $line);
     }
 }

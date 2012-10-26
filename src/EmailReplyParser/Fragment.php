@@ -79,7 +79,7 @@ class Fragment
      */
     public function isEmpty()
     {
-        return '' === $this->getContent();
+        return '' === str_replace("\n", '', $this->getContent());
     }
 
     /**
