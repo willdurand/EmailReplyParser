@@ -4,8 +4,9 @@ EmailReplyParser
 [![Build Status](https://secure.travis-ci.org/willdurand/EmailReplyParser.png)](http://travis-ci.org/willdurand/EmailReplyParser)
 
 **EmailReplyParser** is a port of the GitHub's [EmailReplyParser](http://github.com/github/email_reply_parser)
-library written in Ruby. This is a small PHP 5.3 library to parse plain text
-email content.
+library written in Ruby.
+
+This is a small PHP library to parse plain text email content.
 
 
 Installation
