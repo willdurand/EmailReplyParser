@@ -150,4 +150,25 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $this->assertRegExp('/One outstanding question/', (string) $reply[0]);
         $this->assertRegExp('/^On Oct 1, 2012/', (string) $reply[1]);
     }
+
+    public function testCustomQuoteHeader()
+    {
+        $_email = clone $this->email;
+        $_email::$quote_headers_regex[] = '/^(\d{4}(.+)rta:)$/ms';
+
+        $reply = $_email->read($this->getFixtures('email_custom_quote_header.txt'));
+
+        $this->assertRegExp('/Thank you!/', (string) $reply[0]);
+    }
+
+    public function testEncoding()
+    {
+        $_email = clone $this->email;
+        $_email::$quote_headers_regex[] = '/^(\d{4}(.+)rta:)$/ms';
+        $_email::$quote_headers_regex_reverse[] = '/^:atr.*\d{4}$/s';
+
+        $reply = $_email->read($this->getFixtures('email_encoding_iso_8859_2.txt'));
+
+        $this->assertRegExp('/Örülök neki, köszönöm!/', $reply[0]->getContent('ISO-8859-2'));
+    }
 }

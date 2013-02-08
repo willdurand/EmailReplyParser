@@ -112,15 +112,21 @@ class Fragment
     }
 
     /**
+     * @param string $encoding content encoding type
      * @return string
      */
-    public function getContent()
+    public function getContent($encoding = null)
     {
         if (null === $this->content) {
             $this->content = preg_replace("/^\n/", '', strrev(implode("\n", $this->lines)));
         }
 
-        return $this->content;
+        if (empty($encoding))
+        {
+            return $this->content;
+        }
+
+        return iconv($encoding, 'UTF-8', $this->content);
     }
 
     /**
