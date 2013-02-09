@@ -27,7 +27,7 @@ You're done.
 Usage
 -----
 
-Instanciate an `Email` object and you're done:
+Instantiate an `Email` object and you're done:
 
 ``` php
 <?php
