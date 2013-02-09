@@ -17,6 +17,13 @@ class Email
 {
     const SIG_REGEX = '/(--|__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
 
+    protected $quote_headers_regex = array (
+        '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
+    );
+    protected $quote_headers_regex_reverse = array (
+        '/^:etorw.*nO$/s',
+    );
+
     /**
      * @var array
      */
@@ -32,8 +39,10 @@ class Email
     {
         $text = str_replace("\r\n", "\n", $text);
 
-        if (preg_match('/^(On\s(.+)wrote:)$/ms', $text, $matches)) {
-            $text = str_replace($matches[1], str_replace("\n", ' ', $matches[1]), $text);
+        foreach ($this->quote_headers_regex as $regex) {
+            if (preg_match($regex, $text, $matches)) {
+                $text = str_replace($matches[1], str_replace("\n", ' ', $matches[1]), $text);
+            }
         }
 
         $lines = explode("\n", strrev($text));
@@ -132,6 +141,47 @@ class Email
 
     private function isQuoteHeader($line)
     {
-        return preg_match('/^:etorw.*nO$/s', $line);
+        foreach ($this->quote_headers_regex_reverse as $regex) {
+            if (preg_match($regex, $line)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Returns an array of quote header regex.
+     *
+     * @return array
+     */
+    public function getQutoteHeaderRegex()
+    {
+        return $this->quote_headers_regex;
+    }
+    
+    /**
+     * Returns an array of quote header reversed regex.
+     *
+     * @return array
+     */
+    public function getQutoteHeaderReverseRegex()
+    {
+        return $this->quote_headers_regex_reverse;
+    }
+    
+    /**
+     * Set quote header regex array.
+     */
+    public function setQutoteHeaderRegex(array $a)
+    {
+        $this->quote_headers_regex = $a;
+    }
+    
+    /**
+     * Set quote header reversed regex array.
+     */
+    public function setQutoteHeaderReverseRegex(array $a)
+    {
+        $this->quote_headers_regex_reverse = $a;
     }
 }

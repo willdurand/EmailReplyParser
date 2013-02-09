@@ -150,4 +150,22 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $this->assertRegExp('/One outstanding question/', (string) $reply[0]);
         $this->assertRegExp('/^On Oct 1, 2012/', (string) $reply[1]);
     }
+
+    public function testCustomQuoteHeader()
+    {
+        $_email = clone $this->email;
+
+        $regex = $_email->getQutoteHeaderRegex();
+        $regex[] = '/^(\d{4}(.+)rta:)$/ms';
+        $_email->setQutoteHeaderRegex($regex);
+
+        $regex = $_email->getQutoteHeaderReverseRegex();
+        $regex[] = '/^:atr.*\d{4}$/s';
+        $_email->setQutoteHeaderReverseRegex($regex);
+
+        $reply = $_email->read($this->getFixtures('email_custom_quote_header.txt'));
+
+        $this->assertEquals('Thank you!', (string) $reply[0]);
+    }
+
 }
