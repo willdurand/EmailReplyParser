@@ -49,7 +49,6 @@ class Email
         $lines = explode("\n", strrev($text));
 
         $fragment = null;
-        $isQuoted = false;
         $foundVisible = false;
 
         foreach ($lines as $line) {
@@ -105,8 +104,6 @@ class Email
             if (!$foundVisible) {
                 if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
                     $fragment->setIsHidden(true);
-                } else {
-                    $foundVisible = true;
                 }
             }
 
