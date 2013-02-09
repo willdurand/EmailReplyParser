@@ -67,7 +67,7 @@ class Fragment
     }
 
     /**
-     * @var boolean
+     * @return boolean
      */
     public function isQuoted()
     {
