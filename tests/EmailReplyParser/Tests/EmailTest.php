@@ -91,7 +91,7 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $this->assertRegExp('/Loader/', (string) $reply[1]);
     }
 
-    public function testDoesNotModifiyInputString()
+    public function testDoesNotModifyInputString()
     {
         $input = 'The Quick Brown Fox Jumps Over The Lazy Dog';
         $this->email->read($input);
