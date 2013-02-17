@@ -45,18 +45,18 @@ Alternatively, you can use the static way:
 $reply = \EmailReplyParser\EmailReplyParser::read($emailContent);
 ```
 
-`$reply` is an array of `Fragment` objects. To get the content of each fragment,
-just call the `getContent()` method.
+`$reply` is an array of `Fragment` objects, i.e., `$fragment = $reply[0];`.
+To get the content of each _fragment_, call the `getContent()` method.
 
 A `Fragment` can be a signature, a quoted text, or an hidden text.
 Here is the API:
 
 ``` php
 <?php
+$fragment = $reply[0];
 
 // Get the content
 $fragment->getContent();
-
 // Whether the fragment is a signature or not
 $fragment->isSignature();
 
