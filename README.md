@@ -89,8 +89,9 @@ multiple lines.  GMail breaks up any lines over 80 characters for you.
     wrote:
     > blah
 
+
+The above 'On ....wrote:' can be cleaned up with the following regex:
 ```
-//The above 'On ....wrote:' can be cleaned up with the following regex:
 $fragment_without_date_author= preg_replace('/On(.*?)wrote:(.*?)$/si', '', $fragment->getContent());
 ```
 
