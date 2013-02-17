@@ -81,6 +81,7 @@ Quoted headers aren't picked up if there's an extra line break:
 
     > blah
 
+
 Also, they're not picked up if the email client breaks it up into
 multiple lines.  GMail breaks up any lines over 80 characters for you.
 
@@ -88,7 +89,12 @@ multiple lines.  GMail breaks up any lines over 80 characters for you.
     wrote:
     > blah
 
-Not to mention that we're search for "on" and "wrote".  It won't work
+```
+//The above 'On ....wrote:' can be cleaned up with the following regex:
+$fragment_without_date_author= preg_replace('/On(.*?)wrote:(.*?)$/si', '', $fragment->getContent());
+```
+
+Note though that we're search for "on" and "wrote".  Therefore, it won't work
 with other languages.
 
 Possible solution: Remove "reply@reply.github.com" lines...
