@@ -65,13 +65,7 @@ class Email
                 if (preg_match(self::SIG_REGEX, $fragment->getLastLine())) {
                     $fragment->setIsSignature(true);
 
-                    if (!$foundVisible) {
-                        if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
-                            $fragment->setIsHidden(true);
-                        } else {
-                            $foundVisible = true;
-                        }
-                    }
+                    if (!$foundVisible) $fragment->setIsHidden(true);
 
                     $this->fragments[] = $fragment;
                     $fragment = null;
