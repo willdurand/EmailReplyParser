@@ -66,11 +66,7 @@ class Email
                     $fragment->setIsSignature(true);
 
                     if (!$foundVisible) {
-                        if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
-                            $fragment->setIsHidden(true);
-                        } else {
-                            $foundVisible = true;
-                        }
+                        $fragment->setIsHidden(true);
                     }
 
                     $this->fragments[] = $fragment;
@@ -95,6 +91,11 @@ class Email
 
                     $this->fragments[] = $fragment;
                 }
+
+                if (!empty($line) && $this->isQuoteHeader($line)) {
+                    $isQuoted = true;
+                }
+
                 $fragment = null;
                 $fragment = new Fragment($line, $isQuoted);
             }

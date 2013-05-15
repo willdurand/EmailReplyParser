@@ -165,4 +165,19 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
 
         $this->assertEquals('Thank you!', (string) $reply[0]);
     }
+
+    public function testCustomQuoteHeader2()
+    {
+        $regex   = $this->email->getQuoteHeadersRegex();
+        $regex[] = '/^(From\: .+ .+test\@webdomain\.com.+)/ms';
+        $this->email->setQuoteHeadersRegex($regex);
+
+        $regex   = $this->email->getQuoteHeadersReverseRegex();
+        $regex[] = '/.+'.strrev('com').'\.'.strrev('webdomain').'\@'.strrev('test').'.+/s';
+        $this->email->setQuoteHeadersReverseRegex($regex);
+
+        $this->email->read($this->getFixtures('email_customer_quote_header_2.txt'));
+
+        $this->assertEquals('Thank you very much.', $this->email->getVisibleText());
+    }
 }
