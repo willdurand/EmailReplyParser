@@ -21,10 +21,6 @@ class Email
         '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
     );
 
-    protected $quoteHeadersReverseRegex = array(
-        '/^:etorw.*nO$/s',
-    );
-
     /**
      * @var array
      */
@@ -151,23 +147,10 @@ class Email
         $this->quoteHeadersRegex = $quoteHeadersRegex;
     }
 
-    /**
-     * @return array
-     */
-    public function getQuoteHeadersReverseRegex()
-    {
-        return $this->quoteHeadersReverseRegex;
-    }
-
-    public function setQuoteHeadersReverseRegex(array $quoteHeadersReverseRegex)
-    {
-        $this->quoteHeadersReverseRegex = $quoteHeadersReverseRegex;
-    }
-
     private function isQuoteHeader($line)
     {
-        foreach ($this->quoteHeadersReverseRegex as $regex) {
-            if (preg_match($regex, $line)) {
+        foreach ($this->quoteHeadersRegex as $regex) {
+            if (preg_match($regex, strrev($line))) {
                 return true;
             }
         }
