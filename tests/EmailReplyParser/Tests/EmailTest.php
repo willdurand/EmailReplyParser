@@ -157,10 +157,6 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $regex[] = '/^(\d{4}(.+)rta:)$/ms';
         $this->email->setQuoteHeadersRegex($regex);
 
-        $regex   = $this->email->getQuoteHeadersReverseRegex();
-        $regex[] = '/^:atr.*\d{4}$/s';
-        $this->email->setQuoteHeadersReverseRegex($regex);
-
         $reply = $this->email->read($this->getFixtures('email_custom_quote_header.txt'));
 
         $this->assertEquals('Thank you!', (string) $reply[0]);
@@ -171,10 +167,6 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $regex   = $this->email->getQuoteHeadersRegex();
         $regex[] = '/^(From\: .+ .+test\@webdomain\.com.+)/ms';
         $this->email->setQuoteHeadersRegex($regex);
-
-        $regex   = $this->email->getQuoteHeadersReverseRegex();
-        $regex[] = '/.+'.strrev('com').'\.'.strrev('webdomain').'\@'.strrev('test').'.+/s';
-        $this->email->setQuoteHeadersReverseRegex($regex);
 
         $this->email->read($this->getFixtures('email_customer_quote_header_2.txt'));
 
