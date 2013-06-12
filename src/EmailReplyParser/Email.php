@@ -15,7 +15,7 @@ namespace EmailReplyParser;
  */
 class Email
 {
-    const SIG_REGEX = '/(--|__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
+    const SIG_REGEX = '/(^--|^__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
 
     protected $quoteHeadersRegex = array(
         '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
