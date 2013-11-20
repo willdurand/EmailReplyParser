@@ -1,7 +1,12 @@
 EmailReplyParser
 ================
 
-[![Build Status](https://secure.travis-ci.org/willdurand/EmailReplyParser.png)](http://travis-ci.org/willdurand/EmailReplyParser)
+[![Build
+Status](https://secure.travis-ci.org/willdurand/EmailReplyParser.png)](http://travis-ci.org/willdurand/EmailReplyParser)
+[![Total
+Downloads](https://poser.pugx.org/willdurand/email-reply-parser/downloads.png)](https://packagist.org/packages/willdurand/email-reply-parser)
+[![Latest Stable
+Version](https://poser.pugx.org/willdurand/email-reply-parser/v/stable.png)](https://packagist.org/packages/willdurand/email-reply-parser)
 
 **EmailReplyParser** is a port of the GitHub's [EmailReplyParser](http://github.com/github/email_reply_parser)
 library written in Ruby.
