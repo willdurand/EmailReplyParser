@@ -157,9 +157,9 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
         $regex[] = '/^(\d{4}(.+)rta:)$/ms';
         $this->email->setQuoteHeadersRegex($regex);
 
-        $this->email->read($this->getFixtures('email_custom_quote_header.txt'));
+        $reply = $this->email->read($this->getFixtures('email_custom_quote_header.txt'));
 
-        $this->assertEquals('Thank you!', $this->email->getVisibleText());
+        $this->assertEquals('Thank you!', (string) $reply[0]);
     }
 
     public function testCustomQuoteHeader2()
