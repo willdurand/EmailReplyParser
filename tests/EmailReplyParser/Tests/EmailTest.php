@@ -118,7 +118,7 @@ I am currently using the Java HTTP API.\n", (string) $reply[0]);
     public function testGetVisibleTextReturnsOnlyVisibleFragments()
     {
         $reply = $this->email->read($this->getFixtures('email_2_1.txt'));
-        $visibleFragments = array_filter($reply, function($fragment) {
+        $visibleFragments = array_filter($reply, function ($fragment) {
             return !$fragment->isHidden();
         });
 

@@ -127,7 +127,7 @@ class Email
      */
     public function getVisibleText()
     {
-        $visibleFragments = array_filter($this->getFragments(), function($fragment) {
+        $visibleFragments = array_filter($this->getFragments(), function ($fragment) {
             return !$fragment->isHidden();
         });
 
