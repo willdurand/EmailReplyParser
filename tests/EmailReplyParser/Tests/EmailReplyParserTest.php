@@ -87,4 +87,11 @@ class EmailReplyParserTest extends TestCase
             EmailReplyParser::parseReply($body)
         );
     }
+
+    public function testUnquotedReply()
+    {
+        $body = $this->getFixtures('email_unquoted_reply.txt');
+
+        $this->assertEquals('This is my reply.', EmailReplyParser::parseReply($body));
+    }
 }

@@ -44,10 +44,9 @@ class Fragment
      * @param string  $firstLine
      * @param boolean $quoted
      */
-    public function __construct($firstLine, $quoted = false)
+    public function __construct($quoted = false)
     {
         $this->isQuoted = $quoted;
-        $this->lines[]  = $firstLine;
     }
 
     /**
@@ -96,6 +95,14 @@ class Fragment
     public function setIsHidden($isHidden)
     {
         $this->isHidden = $isHidden;
+    }
+
+    /**
+     * @param boolean
+     */
+    public function setIsQuoted($isQuoted)
+    {
+        $this->isQuoted = $isQuoted;
     }
 
     /**
