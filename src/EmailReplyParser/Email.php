@@ -62,6 +62,10 @@ class Email
                 } else if ($this->isQuoteHeader($last)) {
                     $fragment->setIsQuoted(true);
                     $this->addFragment($fragment);
+                    // Discard the trailing empty line from the next fragment.
+                    // It's arguable whether this is desired behavior but presently
+                    // the EmailTest::testCustomQuoteHeader test expects this behavior.
+                    continue;
                 }
             }
 
@@ -83,7 +87,10 @@ class Email
     }
 
     private function isFragmentLine($fragment, $line, $isQuoted) {
-        if (!$fragment) return false;
+        if (!$fragment) {
+            return false;
+        }
+
         return ($fragment->isQuoted() === $isQuoted)
             || ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line)));
     }
