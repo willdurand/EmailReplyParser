@@ -45,71 +45,58 @@ class Email
         $lines = explode("\n", strrev($text));
 
         $fragment = null;
-        $foundVisible = false;
 
         foreach ($lines as $line) {
-            $line = preg_replace("/\n$/", '', $line);
+            $line = rtrim($line, "\n");
 
-            if (!preg_match(self::SIG_REGEX, $line)) {
+            if (!$this->isSignature($line)) {
                 $line = ltrim($line);
             }
 
-            // isQuoted ?
+            if ($fragment && empty($line)) {
+                $last = $fragment->getLastLine();
+
+                if ($this->isSignature($last)) {
+                    $fragment->setIsSignature(true);
+                    $this->addFragment($fragment);
+                } else if ($this->isQuoteHeader($last)) {
+                    $fragment->setIsQuoted(true);
+                    $this->addFragment($fragment);
+                }
+            }
+
             $isQuoted = preg_match('/(>+)$/s', $line) ? true : false;
 
-            if (null !== $fragment && empty($line)) {
-                if (preg_match(self::SIG_REGEX, $fragment->getLastLine())) {
-                    $fragment->setIsSignature(true);
-
-                    if (!$foundVisible) {
-                        $fragment->setIsHidden(true);
-                    }
-
-                    $this->fragments[] = $fragment;
-                    $fragment = null;
-                }
+            if (!$this->isFragmentLine($fragment, $line, $isQuoted)) {
+                $this->addFragment($fragment);
+                $fragment = new Fragment($isQuoted);
             }
 
-            if (null !== $fragment &&
-                (($isQuoted === $fragment->isQuoted()) ||
-                ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line))))
-            ) {
-                $fragment->addLine($line);
-            } else {
-                if (null !== $fragment) {
-                    if (!$foundVisible) {
-                        if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
-                            $fragment->setIsHidden(true);
-                        } else {
-                            $foundVisible = true;
-                        }
-                    }
-
-                    $this->fragments[] = $fragment;
-                }
-
-                if (!empty($line) && $this->isQuoteHeader($line)) {
-                    $isQuoted = true;
-                }
-
-                $fragment = null;
-                $fragment = new Fragment($line, $isQuoted);
-            }
+            $fragment->addLine($line);
         }
 
-        if (null !== $fragment) {
-            if (!$foundVisible) {
-                if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
-                    $fragment->setIsHidden(true);
-                }
-            }
-
-            $this->fragments[] = $fragment;
-        }
+        $this->addFragment($fragment);
 
         $this->fragments = array_reverse($this->fragments);
 
         return $this->fragments;
+    }
+
+    private function isFragmentLine($fragment, $line, $isQuoted) {
+        if (!$fragment) return false;
+        return ($fragment->isQuoted() === $isQuoted)
+            || ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line)));
+    }
+
+    private function addFragment(&$fragment)
+    {
+        if ($fragment) {
+            if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
+                $fragment->setIsHidden(true);
+            }
+            $this->fragments[] = $fragment;
+        }
+        $fragment = null;
     }
 
     /**
@@ -156,5 +143,10 @@ class Email
         }
 
         return false;
+    }
+
+    private function isSignature($line)
+    {
+        return preg_match(self::SIG_REGEX, $line);
     }
 }
