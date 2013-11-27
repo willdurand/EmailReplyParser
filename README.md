@@ -17,16 +17,20 @@ This is a small PHP library to parse plain text email content.
 Installation
 ------------
 
-If you don't use a _ClassLoader_ in your application, just require the provided
-autoloader:
+The recommended way to install EmailReplyParser is through
+[Composer](http://getcomposer.org/):
 
-``` php
-<?php
-
-require_once 'src/autoload.php';
+``` json
+{
+    "require": {
+        "willdurand/email-reply-parser": "@stable"
+    }
+}
 ```
 
-You're done.
+**Protip:** you should browse the
+[`willdurand/email-reply-parser`](https://packagist.org/packages/willdurand/email-reply-parser)
+page to choose a stable version to use, avoid the `@stable` meta constraint.
 
 
 Usage
@@ -151,17 +155,19 @@ Apparently, prefixing lines with `>` isn't universal either:
 Unit Tests
 ----------
 
-To run the test suite, run Composer first to setup the autoloader:
+Setup the test suite using Composer:
 
-```
-php composer.phar install
-```
+    $ composer install --dev
 
-Then run the following command:
+Run it using PHPUnit:
 
-```
-phpunit
-```
+    $ phpunit
+
+
+Contributing
+------------
+
+See CONTRIBUTING file.
 
 
 Credits
@@ -174,5 +180,5 @@ Credits
 License
 -------
 
-EmailReplyParser is released under the MIT License.
-See the bundled LICENSE file for details.
+EmailReplyParser is released under the MIT License. See the bundled LICENSE
+file for details.
