@@ -2,42 +2,60 @@
 
 namespace EmailReplyParser\Tests;
 
-use EmailReplyParser\Email;
 use EmailReplyParser\EmailReplyParser;
 
 class EmailReplyParserTest extends TestCase
 {
-    protected $email = null;
-
-    protected function setUp()
-    {
-        $this->email = new Email();
-    }
-
     public function testReadWithNullContent()
     {
-        $reply = EmailReplyParser::read(null);
+        $email = EmailReplyParser::read(null);
 
-        $this->assertTrue(is_array($reply));
-        $this->assertEquals(1, count($reply));
-        $this->assertEmpty($reply[0]->__toString());
+        $this->assertInstanceOf('EmailReplyParser\Email', $email);
+        $this->assertEmpty($email->getVisibleText());
     }
 
     public function testReadWithEmptyContent()
     {
-        $reply = EmailReplyParser::read('');
+        $email = EmailReplyParser::read('');
 
-        $this->assertTrue(is_array($reply));
-        $this->assertEquals(1, count($reply));
-        $this->assertEmpty($reply[0]->__toString());
+        $this->assertInstanceOf('EmailReplyParser\Email', $email);
+        $this->assertEmpty($email->getVisibleText());
     }
 
     public function testParseReply()
     {
         $body = $this->getFixtures('email_2.txt');
-        $this->email->read($body);
 
-        $this->assertEquals($this->email->getVisibleText(), EmailReplyParser::parseReply($body));
+        $this->assertEquals(<<<EMAIL
+Hi,
+You can list the keys for the bucket and call delete for each. Or if you
+put the keys (and kept track of them in your test) you can delete them
+one at a time (without incurring the cost of calling list first.)
+
+Something like:
+
+        String bucket = "my_bucket";
+        BucketResponse bucketResponse = riakClient.listBucket(bucket);
+        RiakBucketInfo bucketInfo = bucketResponse.getBucketInfo();
+
+        for(String key : bucketInfo.getKeys()) {
+            riakClient.delete(bucket, key);
+        }
+
+
+would do it.
+
+See also
+
+http://wiki.basho.com/REST-API.html#Bucket-operations
+
+which says
+
+"At the moment there is no straightforward way to delete an entire
+Bucket. There is, however, an open ticket for the feature. To delete all
+the keys in a bucket, you’ll need to delete them all individually."
+EMAIL
+        , EmailReplyParser::parseReply($body));
     }
 
     public function testParseOutSentFromIPhone()

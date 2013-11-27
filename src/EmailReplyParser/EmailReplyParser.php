@@ -10,33 +10,32 @@
 
 namespace EmailReplyParser;
 
+use EmailReplyParser\Parser\EmailParser;
+
 /**
  * @author William Durand <william.durand1@gmail.com>
  */
 class EmailReplyParser
 {
     /**
-     * Static method for convenient usage.
+     * @param string $text An email as text.
      *
-     * @param  string $text An email as text.
-     * @return array
+     * @return Email
      */
     public static function read($text)
     {
-        $email = new Email();
+        $parser = new EmailParser();
 
-        return $email->read($text);
+        return $parser->parse($text);
     }
 
     /**
-     * @param  string $text An email as text.
+     * @param string $text An email as text.
+     *
      * @return string
      */
     public static function parseReply($text)
     {
-        $email = new Email();
-        $email->read($text);
-
-        return $email->getVisibleText();
+        return static::read($text)->getVisibleText();
     }
 }
