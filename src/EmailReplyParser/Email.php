@@ -15,8 +15,13 @@ namespace EmailReplyParser;
  */
 class Email
 {
-    const SIG_REGEX = '/(^--|^__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
+    const SIG_REGEX   = '/(^--|^__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
 
+    const QUOTE_REGEX = '/(>+)$/s';
+
+    /**
+     * @var array
+     */
     protected $quoteHeadersRegex = array(
         '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
     );
@@ -42,11 +47,8 @@ class Email
             }
         }
 
-        $lines = explode("\n", strrev($text));
-
         $fragment = null;
-
-        foreach ($lines as $line) {
+        foreach (explode("\n", strrev($text)) as $line) {
             $line = rtrim($line, "\n");
 
             if (!$this->isSignature($line)) {
@@ -59,7 +61,7 @@ class Email
                 if ($this->isSignature($last)) {
                     $fragment->setIsSignature(true);
                     $this->addFragment($fragment);
-                } else if ($this->isQuoteHeader($last)) {
+                } elseif ($this->isQuoteHeader($last)) {
                     $fragment->setIsQuoted(true);
                     $this->addFragment($fragment);
                     // Discard the trailing empty line from the next fragment.
@@ -69,7 +71,7 @@ class Email
                 }
             }
 
-            $isQuoted = preg_match('/(>+)$/s', $line) ? true : false;
+            $isQuoted = $this->isQuoted($line);
 
             if (!$this->isFragmentLine($fragment, $line, $isQuoted)) {
                 $this->addFragment($fragment);
@@ -81,29 +83,7 @@ class Email
 
         $this->addFragment($fragment);
 
-        $this->fragments = array_reverse($this->fragments);
-
-        return $this->fragments;
-    }
-
-    private function isFragmentLine($fragment, $line, $isQuoted) {
-        if (!$fragment) {
-            return false;
-        }
-
-        return ($fragment->isQuoted() === $isQuoted)
-            || ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line)));
-    }
-
-    private function addFragment(&$fragment)
-    {
-        if ($fragment) {
-            if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
-                $fragment->setIsHidden(true);
-            }
-            $this->fragments[] = $fragment;
-        }
-        $fragment = null;
+        return $this->fragments = array_reverse($this->fragments);
     }
 
     /**
@@ -136,9 +116,16 @@ class Email
         return $this->quoteHeadersRegex;
     }
 
+    /**
+     * @param array $quoteHeadersRegex
+     *
+     * return Email
+     */
     public function setQuoteHeadersRegex(array $quoteHeadersRegex)
     {
         $this->quoteHeadersRegex = $quoteHeadersRegex;
+
+        return $this;
     }
 
     private function isQuoteHeader($line)
@@ -154,6 +141,35 @@ class Email
 
     private function isSignature($line)
     {
-        return preg_match(self::SIG_REGEX, $line);
+        return preg_match(self::SIG_REGEX, $line) ? true : false;
+    }
+
+    private function isQuoted($line)
+    {
+        return preg_match(self::QUOTE_REGEX, $line) ? true : false;
+    }
+
+    private function isFragmentLine($fragment, $line, $isQuoted)
+    {
+        if (!$fragment) {
+            return false;
+        }
+
+        return $fragment && (
+            $fragment->isQuoted() === $isQuoted ||
+            ($fragment->isQuoted() && ($this->isQuoteHeader($line) || empty($line)))
+        );
+    }
+
+    private function addFragment(&$fragment)
+    {
+        if ($fragment) {
+            if ($fragment->isQuoted() || $fragment->isSignature() || $fragment->isEmpty()) {
+                $fragment->setIsHidden(true);
+            }
+            $this->fragments[] = $fragment;
+        }
+
+        $fragment = null;
     }
 }
