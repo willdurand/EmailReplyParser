@@ -13,40 +13,42 @@ namespace EmailReplyParser;
 /**
  * @author William Durand <william.durand1@gmail.com>
  */
-class Fragment
+final class Fragment
 {
-    /**
-     * @var array
-     */
-    protected $lines = array();
-
-    /**
-     * @var boolean
-     */
-    protected $isHidden = false;
-
-    /**
-     * @var boolean
-     */
-    protected $isSignature = false;
-
-    /**
-     * @var boolean
-     */
-    protected $isQuoted = false;
-
     /**
      * @var string
      */
-    protected $content = null;
+    private $content;
 
     /**
-     * @param string  $firstLine
-     * @param boolean $quoted
+     * @var boolean
      */
-    public function __construct($quoted = false)
+    private $isHidden;
+
+    /**
+     * @var boolean
+     */
+    private $isSignature;
+
+    /**
+     * @var boolean
+     */
+    private $isQuoted;
+
+    public function __construct($content, $isHidden, $isSignature, $isQuoted)
     {
-        $this->isQuoted = $quoted;
+        $this->content     = $content;
+        $this->isHidden    = $isHidden;
+        $this->isSignature = $isSignature;
+        $this->isQuoted    = $isQuoted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
@@ -81,58 +83,6 @@ class Fragment
         return '' === str_replace("\n", '', $this->getContent());
     }
 
-    /**
-     * @param boolean
-     */
-    public function setIsSignature($isSignature)
-    {
-        $this->isSignature = $isSignature;
-    }
-
-    /**
-     * @param boolean
-     */
-    public function setIsHidden($isHidden)
-    {
-        $this->isHidden = $isHidden;
-    }
-
-    /**
-     * @param boolean
-     */
-    public function setIsQuoted($isQuoted)
-    {
-        $this->isQuoted = $isQuoted;
-    }
-
-    /**
-     * @param string $line
-     */
-    public function addLine($line)
-    {
-        $this->lines[] = $line;
-    }
-
-    public function getLastLine()
-    {
-        return $this->lines[count($this->lines) - 1];
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        if (null === $this->content) {
-            $this->content = preg_replace("/^\n/", '', strrev(implode("\n", $this->lines)));
-        }
-
-        return $this->content;
-    }
-
-    /**
-     * @return string
-     */
     public function __toString()
     {
         return $this->getContent();

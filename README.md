@@ -36,47 +36,49 @@ page to choose a stable version to use, avoid the `@stable` meta constraint.
 Usage
 -----
 
-Instantiate an `Email` object and you're done:
+Instantiate an `EmailParser` object and parse your email:
 
 ``` php
 <?php
 
-$email = new \EmailReplyParser\Email();
+use EmailReplyParser\Parser\EmailParser;
 
-$reply = $email->read($emailContent);
-// same as:
-$reply = $email->getFragments();
+$email = (new EmailParser())->parse($emailContent);
 ```
 
-Alternatively, you can use the static way:
+You get an `Email` object that contains a set of `Fragment` objects. The `Email`
+class exposes two methods:
 
-``` php
-$reply = \EmailReplyParser\EmailReplyParser::read($emailContent);
-```
+* `getFragments()`: returns all fragments;
+* `getVisibleText()`: returns a string which represents the content considered
+  as "visible".
 
-`$reply` is an array of `Fragment` objects, i.e., `$fragment = $reply[0];`.
-To get the content of each _fragment_, call the `getContent()` method.
-
-A `Fragment` can be a signature, a quoted text, or an hidden text.
-Here is the API:
+The `Fragment` represents a part of the full email content, and has the
+following API:
 
 ``` php
 <?php
-$fragment = $reply[0];
 
-// Get the content
+$fragment = current($email->getFragments());
+
 $fragment->getContent();
-// Whether the fragment is a signature or not
+
 $fragment->isSignature();
 
-// Whether the fragment is quoted or not
 $fragment->isQuoted();
 
-// Whether the fragment is hidden or not
 $fragment->isHidden();
 
-// Whether the fragment is empty or not
 $fragment->isEmpty();
+```
+
+Alternatively, you can rely on the `EmailReplyParser` to either parse an email
+or get its visible content in a single line of code:
+
+``` php
+$email = \EmailReplyParser\EmailReplyParser::read($emailContent);
+
+$visibleText = \EmailReplyParser\EmailReplyParser::parseReply($emailContent);
 ```
 
 
