@@ -92,17 +92,7 @@ class EmailParser
             $this->addFragment($fragment);
         }
 
-        $fragments = array();
-        foreach (array_reverse($this->fragments) as $fragment) {
-            $fragments[] = new Fragment(
-                preg_replace("/^\n/", '', strrev(implode("\n", $fragment->lines))),
-                $fragment->isHidden,
-                $fragment->isSignature,
-                $fragment->isQuoted
-            );
-        }
-
-        return new Email($fragments);
+        return $this->createEmail($this->fragments);
     }
 
     /**
@@ -123,6 +113,26 @@ class EmailParser
         $this->quoteHeadersRegex = $quoteHeadersRegex;
 
         return $this;
+    }
+
+    /**
+     * @param FragmentDTO[]
+     *
+     * @return Email
+     */
+    protected function createEmail(array $fragmentDTOs)
+    {
+        $fragments = array();
+        foreach (array_reverse($fragmentDTOs) as $fragment) {
+            $fragments[] = new Fragment(
+                preg_replace("/^\n/", '', strrev(implode("\n", $fragment->lines))),
+                $fragment->isHidden,
+                $fragment->isSignature,
+                $fragment->isQuoted
+            );
+        }
+
+        return new Email($fragments);
     }
 
     private function isQuoteHeader($line)
