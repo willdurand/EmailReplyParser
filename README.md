@@ -8,10 +8,9 @@ Downloads](https://poser.pugx.org/willdurand/email-reply-parser/downloads.png)](
 [![Latest Stable
 Version](https://poser.pugx.org/willdurand/email-reply-parser/v/stable.png)](https://packagist.org/packages/willdurand/email-reply-parser)
 
-**EmailReplyParser** is a port of the GitHub's [EmailReplyParser](http://github.com/github/email_reply_parser)
+**EmailReplyParser** is a PHP library for parsing plain text email content,
+based on GitHub's [email_reply_parser](http://github.com/github/email_reply_parser)
 library written in Ruby.
-
-This is a small PHP library to parse plain text email content.
 
 
 Installation
