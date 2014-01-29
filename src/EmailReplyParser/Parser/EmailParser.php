@@ -148,12 +148,12 @@ class EmailParser
 
     private function isSignature($line)
     {
-        return preg_match(self::SIG_REGEX, $line) ? true : false;
+        return preg_match(static::SIG_REGEX, $line) ? true : false;
     }
 
     private function isQuote($line)
     {
-        return preg_match(self::QUOTE_REGEX, $line) ? true : false;
+        return preg_match(static::QUOTE_REGEX, $line) ? true : false;
     }
 
     private function isEmpty(FragmentDTO $fragment)
