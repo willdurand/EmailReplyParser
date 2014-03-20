@@ -181,7 +181,31 @@ EMAIL
         $this->parser->setQuoteHeadersRegex($regex);
 
         $email = $this->parser->parse($this->getFixtures('email_customer_quote_header_2.txt'));
+        $fragments = $email->getFragments();
+        $this->assertCount(2, $fragments);
 
         $this->assertEquals('Thank you very much.', $email->getVisibleText());
+        $this->assertTrue($fragments[1]->isHidden());
+        $this->assertTrue($fragments[1]->isQuoted());
+    }
+
+    /**
+     * @dataProvider getDateFormats
+     */
+    public function testDateQuoteHeader($date)
+    {
+        $email = $this->parser->parse(str_replace('[DATE]', $date, $this->getFixtures('email_with_date_headers.txt')));
+
+        $this->assertEquals('Thank you very much.', $email->getVisibleText());
+    }
+
+    public function getDateFormats()
+    {
+        return array(
+            array('On Tue, 2011-03-01 at 18:02 +0530, Abhishek Kona wrote:'),
+            array('2014-03-20 8:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
+            array('Le 19 mars 2014 10:37, Cédric Lombardot <cedric.lombardot@gmail.com> a écrit :'), // Gmail
+            array('Le 19/03/2014 11:34, Georges du chemin a écrit :'), // Thunderbird
+        );
     }
 }

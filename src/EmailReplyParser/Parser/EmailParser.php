@@ -27,6 +27,8 @@ class EmailParser
      */
     private $quoteHeadersRegex = array(
         '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
+        '/^(Le\s(.+)écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
+        '/^(20[0-9]{2}\-(0?[1-9]|1[012])\-(0?[1-2][0-9]|3[01]|[1-9])\s0?[0-9]:\d{2}\s(.+):)$/ms', // 20YY-MM-DD HH:II GMT+01:00 MAME <EMAIL>:
     );
 
     /**
