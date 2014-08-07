@@ -97,9 +97,9 @@ class EmailParser
         }
 
         $email = $this->createEmail($this->fragments);
-        
+
         $this->fragments = array();
-        
+
         return $email;
     }
 
