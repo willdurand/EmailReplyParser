@@ -23,7 +23,7 @@ class EmailParser
     const QUOTE_REGEX = '/(>+)$/s';
 
     /**
-     * @var array
+     * @var string[]
      */
     private $quoteHeadersRegex = array(
         '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
@@ -33,15 +33,16 @@ class EmailParser
     );
 
     /**
-     * @var array
+     * @var FragmentDTO[]
      */
     private $fragments = array();
 
     /**
      * Parse a text which represents an email and splits it into fragments.
      *
-     * @param  string $text A text.
-     * @return array
+     * @param string $text A text.
+     *
+     * @return Email
      */
     public function parse($text)
     {
@@ -99,7 +100,7 @@ class EmailParser
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getQuoteHeadersRegex()
     {
@@ -107,7 +108,7 @@ class EmailParser
     }
 
     /**
-     * @param array $quoteHeadersRegex
+     * @param string[] $quoteHeadersRegex
      *
      * @return EmailParser
      */
@@ -119,7 +120,7 @@ class EmailParser
     }
 
     /**
-     * @param FragmentDTO[]
+     * @param FragmentDTO[] $fragmentDTOs
      *
      * @return Email
      */
