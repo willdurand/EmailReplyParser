@@ -18,18 +18,18 @@ use EmailReplyParser\Fragment;
  */
 class EmailParser
 {
-    const SIG_REGEX   = '/(^--|^__|\w-$)|(^(\w+\s*){1,3} ym morf tneS$)/s';
+    const SIG_REGEX   = '/(?:^--|^__|\w-$)|(?:^(?:\w+\s*){1,3} ym morf tneS$)/s';
 
-    const QUOTE_REGEX = '/(>+)$/s';
+    const QUOTE_REGEX = '/>+$/s';
 
     /**
      * @var array
      */
     private $quoteHeadersRegex = array(
-        '/^(On\s(.+)wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
-        '/^(Le\s(.+)écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
-        '/^(El\s(.+)escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
-        '/^(20[0-9]{2}\-(0?[1-9]|1[012])\-(0?[1-2][0-9]|3[01]|[1-9])\s0?[0-9]:\d{2}\s(.+):)$/ms', // 20YY-MM-DD HH:II GMT+01:00 MAME <EMAIL>:
+        '/^(On\s.+wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
+        '/^(Le\s.+écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
+        '/^(El\s.+escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
+        '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[1-2][0-9]|3[01]|[1-9])\s0?[0-9]:\d{2}\s.+:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 MAME <EMAIL>:
     );
 
     /**
