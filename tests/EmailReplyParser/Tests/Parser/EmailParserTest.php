@@ -46,6 +46,15 @@ EMAIL
         $this->assertEquals("-Abhishek Kona\n\n", (string) $fragments[1]);
     }
 
+    public function testReusesParser()
+    {
+        $email1 = $this->parser->parse($this->getFixtures('email_1.txt'));
+        $this->assertCount(3, $email1->getFragments());
+
+        $email2 = $this->parser->parse($this->getFixtures('email_1.txt'));
+        $this->assertCount(3, $email2->getFragments());
+    }
+
     public function testReadsTopPost()
     {
         $email     = $this->parser->parse($this->getFixtures('email_3.txt'));
