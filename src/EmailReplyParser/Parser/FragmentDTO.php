@@ -16,7 +16,7 @@ namespace EmailReplyParser\Parser;
 class FragmentDTO
 {
     /**
-     * @var array
+     * @var string[]
      */
     public $lines = array();
 

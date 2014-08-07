@@ -20,6 +20,9 @@ final class Email
      */
     private $fragments;
 
+    /**
+     * @param Fragment[] $fragments
+     */
     public function __construct(array $fragments = array())
     {
         $this->fragments = $fragments;
@@ -38,7 +41,7 @@ final class Email
      */
     public function getVisibleText()
     {
-        $visibleFragments = array_filter($this->fragments, function ($fragment) {
+        $visibleFragments = array_filter($this->fragments, function (Fragment $fragment) {
             return !$fragment->isHidden();
         });
 
