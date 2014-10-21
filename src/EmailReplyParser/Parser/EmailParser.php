@@ -18,7 +18,7 @@ use EmailReplyParser\Fragment;
  */
 class EmailParser
 {
-    const SIG_REGEX   = '/(?:^--|^__|\w-$)|(?:^(?:\w+\s*){1,3} ym morf tneS$)/s';
+    const SIG_REGEX   = '/(?:--\s*$|__\s*$|\w-$)|(?:^(?:\w+\s*){1,3} ym morf tneS$)/s';
 
     const QUOTE_REGEX = '/>+$/s';
 

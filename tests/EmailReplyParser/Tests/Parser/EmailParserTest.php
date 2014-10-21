@@ -7,6 +7,9 @@ use EmailReplyParser\Tests\TestCase;
 
 class EmailParserTest extends TestCase
 {
+    /**
+     * @var EmailParser
+     */
     private $parser;
 
     protected function setUp()
@@ -160,7 +163,29 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertRegExp("/^--\nrick/", (string) $fragments[1]);
+        $this->assertRegExp('/^--\nrick/', (string) $fragments[1]);
+    }
+
+    public function testReadsEmailWithCorrectSignatureWithSpace()
+    {
+        // A common convention is to use "-- " as delimitor, but trailing spaces are often stripped by IDEs, so add them here
+        $content = str_replace('--', '-- ', $this->getFixtures('correct_sig.txt'));
+
+        $email     = $this->parser->parse($content);
+        $fragments = $email->getFragments();
+
+        $this->assertCount(2, $fragments);
+
+        $this->assertFalse($fragments[0]->isQuoted());
+        $this->assertFalse($fragments[1]->isQuoted());
+
+        $this->assertFalse($fragments[0]->isSignature());
+        $this->assertTrue($fragments[1]->isSignature());
+
+        $this->assertFalse($fragments[0]->isHidden());
+        $this->assertTrue($fragments[1]->isHidden());
+
+        $this->assertRegExp('/^-- \nrick/', (string) $fragments[1]);
     }
 
     public function testOneIsNotOn()
