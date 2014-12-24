@@ -19,18 +19,9 @@ Installation
 The recommended way to install EmailReplyParser is through
 [Composer](http://getcomposer.org/):
 
-``` json
-{
-    "require": {
-        "willdurand/email-reply-parser": "@stable"
-    }
-}
+``` shell
+composer require willdurand/email-reply-parser
 ```
-
-**Protip:** you should browse the
-[`willdurand/email-reply-parser`](https://packagist.org/packages/willdurand/email-reply-parser)
-page to choose a stable version to use, avoid the `@stable` meta constraint.
-
 
 Usage
 -----
