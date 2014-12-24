@@ -38,7 +38,7 @@ Something like:
         BucketResponse bucketResponse = riakClient.listBucket(bucket);
         RiakBucketInfo bucketInfo = bucketResponse.getBucketInfo();
 
-        for(String key : bucketInfo.getKeys()) {
+        for (String key : bucketInfo.getKeys()) {
             riakClient.delete(bucket, key);
         }
 

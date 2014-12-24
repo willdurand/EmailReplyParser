@@ -159,6 +159,9 @@ class EmailParser
         return preg_match(static::SIG_REGEX, $line) ? true : false;
     }
 
+    /**
+     * @param string $line
+     */
     private function isQuote($line)
     {
         return preg_match(static::QUOTE_REGEX, $line) ? true : false;
@@ -169,7 +172,11 @@ class EmailParser
         return '' === implode('', $fragment->lines);
     }
 
-    private function isFragmentLine(FragmentDTO $fragment, $line, $isQuoted)
+    /**
+ * @param string $line
+ * @param boolean $isQuoted
+ */
+private function isFragmentLine(FragmentDTO $fragment, $line, $isQuoted)
     {
         return $fragment->isQuoted === $isQuoted ||
             ($fragment->isQuoted && ($this->isQuoteHeader($line) || empty($line)));
