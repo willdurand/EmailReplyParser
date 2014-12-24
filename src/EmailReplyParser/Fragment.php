@@ -35,6 +35,12 @@ final class Fragment
      */
     private $isQuoted;
 
+    /**
+     * @param string  $content
+     * @param boolean $isHidden
+     * @param boolean $isSignature
+     * @param boolean $isQuoted
+     */
     public function __construct($content, $isHidden, $isSignature, $isQuoted)
     {
         $this->content     = $content;
