@@ -239,6 +239,7 @@ EMAIL
             array('On Tue, 2011-03-01 at 18:02 +0530, Abhishek Kona wrote:'),
             array('2014-03-20 8:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
             array('2014-03-20 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
+            array('2014-03-09 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
             array('Le 19 mars 2014 10:37, Cédric Lombardot <cedric.lombardot@gmail.com> a écrit :'), // Gmail
             array('El 19/03/2014 11:34, Juan Pérez <juan.perez@mailcatch.com> escribió:'), // Gmail in spanish
             array('W dniu 7 stycznia 2015 15:24 użytkownik Paweł Brzoski <pbrzoski91@gmail.com> napisał:'), //Gmail in polish
