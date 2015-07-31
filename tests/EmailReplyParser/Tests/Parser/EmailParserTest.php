@@ -245,6 +245,9 @@ EMAIL
             array('W dniu 7 stycznia 2015 15:24 użytkownik Paweł Brzoski <pbrzoski91@gmail.com> napisał:'), //Gmail in polish
             array('Le 19/03/2014 11:34, Georges du chemin a écrit :'), // Thunderbird
             array('W dniu 2015-01-07 14:23, pbrzoski91@gmail.com pisze: '), // Thunderbird in polish
+            array('Den 08/06/2015 kl. 21.21 skrev Test user <test@example.com>:'), // Danish
+            array('Am 25.06.2015 um 10:55 schrieb Test user:'), // German 1
+            array('Test user <test@example.com> schrieb:'), // German 2
         );
     }
 }
