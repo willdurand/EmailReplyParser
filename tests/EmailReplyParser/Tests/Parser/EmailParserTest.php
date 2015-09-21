@@ -166,10 +166,51 @@ EMAIL
         $this->assertRegExp('/^--\nrick/', (string) $fragments[1]);
     }
 
+    public function testReadsEmailWithSignatureWithNoEmptyLineAbove()
+    {
+        $email     = $this->parser->parse($this->getFixtures('sig_no_empty_line.txt'));
+        $fragments = $email->getFragments();
+
+        $this->assertCount(2, $fragments);
+
+        $this->assertFalse($fragments[0]->isQuoted());
+        $this->assertFalse($fragments[1]->isQuoted());
+
+        $this->assertFalse($fragments[0]->isSignature());
+        $this->assertTrue($fragments[1]->isSignature());
+
+        $this->assertFalse($fragments[0]->isHidden());
+        $this->assertTrue($fragments[1]->isHidden());
+
+        $this->assertRegExp('/^--\nrick/', (string) $fragments[1]);
+    }
+
     public function testReadsEmailWithCorrectSignatureWithSpace()
     {
         // A common convention is to use "-- " as delimitor, but trailing spaces are often stripped by IDEs, so add them here
         $content = str_replace('--', '-- ', $this->getFixtures('correct_sig.txt'));
+
+        $email     = $this->parser->parse($content);
+        $fragments = $email->getFragments();
+
+        $this->assertCount(2, $fragments);
+
+        $this->assertFalse($fragments[0]->isQuoted());
+        $this->assertFalse($fragments[1]->isQuoted());
+
+        $this->assertFalse($fragments[0]->isSignature());
+        $this->assertTrue($fragments[1]->isSignature());
+
+        $this->assertFalse($fragments[0]->isHidden());
+        $this->assertTrue($fragments[1]->isHidden());
+
+        $this->assertRegExp('/^-- \nrick/', (string) $fragments[1]);
+    }
+
+    public function testReadsEmailWithCorrectSignatureWithNoEmptyLineWithSpace()
+    {
+        // A common convention is to use "-- " as delimitor, but trailing spaces are often stripped by IDEs, so add them here
+        $content = str_replace('--', '-- ', $this->getFixtures('sig_no_empty_line.txt'));
 
         $email     = $this->parser->parse($content);
         $fragments = $email->getFragments();

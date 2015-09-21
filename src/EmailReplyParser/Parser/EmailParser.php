@@ -66,7 +66,7 @@ class EmailParser
                 $line = ltrim($line);
             }
 
-            if ($fragment && empty($line)) {
+            if ($fragment) {
                 $last = end($fragment->lines);
 
                 if ($this->isSignature($last)) {
@@ -74,7 +74,7 @@ class EmailParser
                     $this->addFragment($fragment);
 
                     $fragment = null;
-                } elseif ($this->isQuoteHeader($last)) {
+                } elseif (empty($line) && $this->isQuoteHeader($last)) {
                     $fragment->isQuoted = true;
                     $this->addFragment($fragment);
 
