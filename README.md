@@ -149,7 +149,7 @@ Unit Tests
 
 Setup the test suite using Composer:
 
-    $ composer install --dev
+    $ composer install
 
 Run it using PHPUnit:
 
