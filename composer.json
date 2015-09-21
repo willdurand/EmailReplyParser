@@ -14,7 +14,10 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "psr-0": { "EmailReplyParser": "src/" }
+        "psr-4": { "EmailReplyParser\\": "src/EmailReplyParser" }
+    },
+    "autoload-dev": {
+        "psr-4": { "EmailReplyParser\\Tests\\": "tests/EmailReplyParser/Tests" }
     },
     "extra": {
         "branch-alias": {
