@@ -264,6 +264,15 @@ EMAIL
         $this->assertTrue($fragments[1]->isQuoted());
     }
 
+    public function testLsListing()
+    {
+        $email = $this->parser->parse($this->getFixtures('email_ls-l.txt'));
+        $fragments = $email->getFragments();
+        foreach ($fragments as $fragment) {
+            print_r(array((int)$fragment->isHidden(), (int)$fragment->isSignature(), (int)$fragment->isQuoted(), $fragment->getContent()));
+        }
+    }
+
     /**
      * @dataProvider getDateFormats
      */
