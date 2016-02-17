@@ -18,7 +18,10 @@ use EmailReplyParser\Fragment;
  */
 class EmailParser
 {
-    const SIG_REGEX   = '/(?:--\s*$|__\s*$|\w-$)|(?:^(?:\w+\s*){1,3} ym morf tneS$)/s';
+    /**
+     * Regex to match signatures
+     */
+    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- )|(?:^Sent from my (?:\s*\w+){1,3})$/s';
 
     const QUOTE_REGEX = '/>+$/s';
 
@@ -160,7 +163,7 @@ class EmailParser
 
     private function isSignature($line)
     {
-        return preg_match(static::SIG_REGEX, $line) ? true : false;
+        return preg_match(static::SIG_REGEX, strrev($line)) ? true : false;
     }
 
     /**
