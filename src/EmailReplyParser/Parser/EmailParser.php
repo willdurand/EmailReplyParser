@@ -21,7 +21,7 @@ class EmailParser
     /**
      * Regex to match signatures
      */
-    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- )|(?:^Sent from my (?:\s*\w+){1,3})$/s';
+    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,3})$/s';
 
     const QUOTE_REGEX = '/>+$/s';
 
