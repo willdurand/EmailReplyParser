@@ -264,6 +264,23 @@ EMAIL
         $this->assertTrue($fragments[1]->isQuoted());
     }
 
+    public function testCustomQuoteHeader3()
+    {
+        $regex   = $this->parser->getQuoteHeadersRegex();
+        $regex[] = '/^(De \: .+ .+someone\@yahoo.fr\.com.+)/ms';
+        $this->parser->setQuoteHeadersRegex($regex);
+
+        $email = $this->parser->parse($this->getFixtures('email_customer_quote_header_3.txt'));
+        $fragments = $email->getFragments();
+        $this->assertCount(2, $fragments);
+
+        $this->assertEquals("bonjour,
+je n'ai pas eu de retour sur ma précision..
+merci d'avance", $email->getVisibleText());
+        $this->assertTrue($fragments[1]->isHidden());
+        $this->assertTrue($fragments[1]->isQuoted());
+    }
+
     /**
      * @dataProvider getDateFormats
      */

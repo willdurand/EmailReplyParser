@@ -36,6 +36,8 @@ class EmailParser
         '/^(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
         '/^(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
+        '/(From.*:.+\s<.+>)/m', // "From: NAME <EMAIL>"  OR "From : NAME <EMAIL>" (With support whitespace before start)
+        '/(De.*:.+\s<.+>)/m', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" (With support whitespace before start)
         '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[0-9]|[1-2][0-9]|3[01]|[1-9])\s[0-2]?[0-9]:\d{2}\s.+?:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 NAME <EMAIL>:
     );
 
