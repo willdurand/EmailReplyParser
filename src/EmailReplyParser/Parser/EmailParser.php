@@ -39,6 +39,7 @@ class EmailParser
         '/^(20[0-9]{2}\..+\s작성:)$/m', // DATE TIME NAME 작성:
         '/^(20[0-9]{2}\/.+のメッセージ:)$/m', // DATE TIME、NAME のメッセージ:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
+        '/^(From.+$)/m', // From NAME <EMAIL> schrieb:
         '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[0-9]|[1-2][0-9]|3[01]|[1-9])\s[0-2]?[0-9]:\d{2}\s.+?:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 NAME <EMAIL>:
     );
 
