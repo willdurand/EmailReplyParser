@@ -34,7 +34,7 @@ class EmailParser
         '/^\s*(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
         '/^\s*(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
         '/^\s*(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
-        '/^\s*(W dniu\s.+?(pisze|napisał):)$/ms', // W dniu DATE, NAME <EMAIL> pisze|napisał:
+        '/^\s*(W\sdniu\s.+?(pisze|napisał):)$/msu', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
         '/^\s*(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
