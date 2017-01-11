@@ -29,17 +29,17 @@ class EmailParser
      * @var string[]
      */
     private $quoteHeadersRegex = array(
-        '/^(On\s.+?wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
-        '/^(Le\s.+?écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
-        '/^(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
-        '/^(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
-        '/^(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
-        '/^(W dniu\s.+?(pisze|napisał):)$/ms', // W dniu DATE, NAME <EMAIL> pisze|napisał:
-        '/^(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
-        '/^(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
+        '/^\s*(On\s.+?wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
+        '/^\s*(Le\s.+?écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
+        '/^\s*(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
+        '/^\s*(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
+        '/^\s*(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
+        '/^\s*(W dniu\s.+?(pisze|napisał):)$/ms', // W dniu DATE, NAME <EMAIL> pisze|napisał:
+        '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
+        '/^\s*(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
-        '/(From\s:.+\s?<.+>)/su', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
-        '/(De\s:.+\s?<.+>)/su', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)
+        '/^\s*(From\s:.+\s?<.+>)/su', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
+        '/^\s*(De\s:.+\s?<.+>)/su', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)
         '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[0-9]|[1-2][0-9]|3[01]|[1-9])\s[0-2]?[0-9]:\d{2}\s.+?:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 NAME <EMAIL>:
     );
 
