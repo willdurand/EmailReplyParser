@@ -37,6 +37,9 @@ class EmailParser
         '/^\s*(W\sdniu\s.+?(pisze|napisał):)$/msu', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
         '/^\s*(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
+        '/^(在.+写道：)$/ms', // > 在 DATE, TIME, NAME 写道：
+        '/^(20[0-9]{2}\..+\s작성:)$/m', // DATE TIME NAME 작성:
+        '/^(20[0-9]{2}\/.+のメッセージ:)$/m', // DATE TIME、NAME のメッセージ:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
         '/^\s*(From\s?:.+\s?([|<).+(]|>))/su', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
         '/^\s*(De\s?:.+\s?([|<).+(]|>))/su', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)

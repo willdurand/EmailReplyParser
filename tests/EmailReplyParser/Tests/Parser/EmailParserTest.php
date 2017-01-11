@@ -402,6 +402,9 @@ merci d'avance", $email->getVisibleText());
             array('Den 08/06/2015 kl. 21.21 skrev Test user <test@example.com>:'), // Danish
             array('Am 25.06.2015 um 10:55 schrieb Test user:'), // German 1
             array('Test user <test@example.com> schrieb:'), // German 2
+            array('在 2016年11月8日，下午2:23，Test user <test@example.com> 写道：'), // Chinese Apple Mail iPhone parsed html
+            array('2016. 11. 8. 오후 12:39 Test user <test@example.com> 작성:'), // Korean Apple Mail iPhone
+            array('2016/11/08 14:26、Test user <test@example.com> のメッセージ:'), // Japanese Apple Mail iPhone
         );
     }
 }
