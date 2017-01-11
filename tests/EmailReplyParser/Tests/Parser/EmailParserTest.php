@@ -197,6 +197,18 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
 
     }
 
+    public function testEmailWithSquareBrackets()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_12.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
+Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
+Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
+Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
+et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+
+    }
+
     public function testGetVisibleTextReturnsOnlyVisibleFragments()
     {
         $email = $this->parser->parse($this->getFixtures('email_2_1.txt'));
