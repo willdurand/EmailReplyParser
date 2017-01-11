@@ -7,6 +7,12 @@ use EmailReplyParser\Tests\TestCase;
 
 class EmailParserTest extends TestCase
 {
+    const COMMON_FIRST_FRAGMENT = 'Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
+Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
+Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
+Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
+et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.';
+
     /**
      * @var EmailParser
      */
@@ -141,11 +147,7 @@ EMAIL
     {
         $email     = $this->parser->parse($this->getFixtures('email_7.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra d
-ignissim odio congue suscipit. Suspendisse dictum ex a erat efficitur facil
-isis. Maecenas tempor libero nec orci scelerisque porta a quis orci. Donec
-sem augue, convallis at ipsum eget, aliquam consectetur nunc. Integer a jus
-to quis lacus convallis iaculis. Vestibulum nec dui luctus, rhoncus tortor in', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -153,10 +155,7 @@ to quis lacus convallis iaculis. Vestibulum nec dui luctus, rhoncus tortor in', 
     {
         $email     = $this->parser->parse($this->getFixtures('email_8.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('dignissim non purus at, convallis luctus est. Phasellus purus magna, venenatis vel sagittis
-sit amet, posuere nec dui. Maecenas hendrerit venenatis risus ut hendrerit.
-
-mvg', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -164,12 +163,7 @@ mvg', trim($fragments[0]));
     {
         $email     = $this->parser->parse($this->getFixtures('email_9.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Proin cursus, nibh sed posuere hendrerit, dui mauris scelerisque erat, vel tempus mauris odio eu lectus.
-Nulla facilisi. Praesent pellentesque vehicula ante. Aenean posuere placerat magna porta mollis.
-Fusce interdum ante ac purus ultricies, sed rhoncus ligula ultricies. Ut eleifend augue at laoreet bibendum.
-Nullam mollis euismod erat, convallis porta velit commodo eu.
-
-Maecenas', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -177,11 +171,7 @@ Maecenas', trim($fragments[0]));
     {
         $email     = $this->parser->parse($this->getFixtures('email_10.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -189,11 +179,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_11.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -201,11 +187,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_12.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -213,11 +195,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_13.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -225,11 +203,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_14.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -237,11 +211,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_15.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -249,11 +219,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_16.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
@@ -261,11 +227,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
     {
         $email     = $this->parser->parse($this->getFixtures('email_17.txt'));
         $fragments = $email->getFragments();
-        $this->assertEquals('Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
-Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
-Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
-Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
-et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.', trim($fragments[0]));
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
 
     }
 
