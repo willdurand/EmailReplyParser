@@ -137,6 +137,42 @@ EMAIL
         $this->assertRegExp('/Was this/', (string) $fragments[1]);
     }
 
+    public function testEmailItalian()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_7.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra d
+ignissim odio congue suscipit. Suspendisse dictum ex a erat efficitur facil
+isis. Maecenas tempor libero nec orci scelerisque porta a quis orci. Donec
+sem augue, convallis at ipsum eget, aliquam consectetur nunc. Integer a jus
+to quis lacus convallis iaculis. Vestibulum nec dui luctus, rhoncus tortor in', trim($fragments[0]));
+
+    }
+
+    public function testEmailDutch()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_8.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals('dignissim non purus at, convallis luctus est. Phasellus purus magna, venenatis vel sagittis
+sit amet, posuere nec dui. Maecenas hendrerit venenatis risus ut hendrerit.
+
+mvg', trim($fragments[0]));
+
+    }
+
+    public function testEmailSignatureWithEqual()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_9.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals('Proin cursus, nibh sed posuere hendrerit, dui mauris scelerisque erat, vel tempus mauris odio eu lectus.
+Nulla facilisi. Praesent pellentesque vehicula ante. Aenean posuere placerat magna porta mollis.
+Fusce interdum ante ac purus ultricies, sed rhoncus ligula ultricies. Ut eleifend augue at laoreet bibendum.
+Nullam mollis euismod erat, convallis porta velit commodo eu.
+
+Maecenas', trim($fragments[0]));
+
+    }
+
     public function testGetVisibleTextReturnsOnlyVisibleFragments()
     {
         $email = $this->parser->parse($this->getFixtures('email_2_1.txt'));

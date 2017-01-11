@@ -1,0 +1,41 @@
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra d
+ignissim odio congue suscipit. Suspendisse dictum ex a erat efficitur facil
+isis. Maecenas tempor libero nec orci scelerisque porta a quis orci. Donec
+sem augue, convallis at ipsum eget, aliquam consectetur nunc. Integer a jus
+to quis lacus convallis iaculis. Vestibulum nec dui luctus, rhoncus tortor in
+
+Il giovedì 8 dicembre 2016, Company Questions <questions@mycompany.com>
+ha scritto:
+> Ciao Lorem
+>
+> Dino ha risposto alla tua domanda:
+>
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra d
+ignissim odio?
+>
+>
+> Vestibulum nec dui luctus, rhoncus tortor in
+>
+>
+> "Lorem
+>
+> Maecenas tempor libero nec orci scelerisque porta a quis orci.
+rhoncus tortor in.
+>
+
+-- 
+
+____________________________________________________________________
+
+Le informazioni contenute in questo messaggio e negli allegati sono
+riservate e per uso esclusivo del destinatario.
+
+Persone diverse dal destinatario non possono copiare o consegnare il
+messaggio a terzi, né trattare i dati qui contenuti.
+
+Se ricevete questo messaggio per errore, Vi preghiamo di restituircelo
+immediatamente e di cancellarlo. Grazie.
+
+MyCompany - 123456 ROMA
+tel 0123-456789 fax 0123-456789 e-mail info@client.it
+_____________________________________________________________________

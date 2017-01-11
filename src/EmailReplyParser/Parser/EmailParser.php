@@ -21,7 +21,7 @@ class EmailParser
     /**
      * Regex to match signatures
      */
-    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,3})$/s';
+    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,3}$)|(?:^={30,}$)$/s';
 
     const QUOTE_REGEX = '/>+$/s';
 
@@ -32,6 +32,8 @@ class EmailParser
         '/^(On\s.+?wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
         '/^(Le\s.+?écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
         '/^(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
+        '/^(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
+        '/^(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
         '/^(W dniu\s.+?(pisze|napisał):)$/ms', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
         '/^(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
