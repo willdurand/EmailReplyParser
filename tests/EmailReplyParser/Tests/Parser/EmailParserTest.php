@@ -231,6 +231,14 @@ EMAIL
 
     }
 
+    public function testEmailOutlookEn()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_18.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
 
     public function testGetVisibleTextReturnsOnlyVisibleFragments()
     {
