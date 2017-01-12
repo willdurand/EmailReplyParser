@@ -7,6 +7,12 @@ use EmailReplyParser\Tests\TestCase;
 
 class EmailParserTest extends TestCase
 {
+    const COMMON_FIRST_FRAGMENT = 'Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
+Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
+Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
+Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
+et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.';
+
     /**
      * @var EmailParser
      */
@@ -137,6 +143,95 @@ EMAIL
         $this->assertRegExp('/Was this/', (string) $fragments[1]);
     }
 
+    public function testEmailItalian()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_7.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailDutch()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_8.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailSignatureWithEqual()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_9.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailHotmail()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_10.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailWhitespaceBeforeHeader()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_11.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailWithSquareBrackets()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_12.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailDaIntoItalian()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_13.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailHeaderPolish()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_14.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailSentFromMy()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_15.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailHeaderPolishWithDniaAndNapisala()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_16.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+    public function testEmailHeaderPolishWithDateInIso8601()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_17.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
+
     public function testGetVisibleTextReturnsOnlyVisibleFragments()
     {
         $email = $this->parser->parse($this->getFixtures('email_2_1.txt'));
@@ -260,6 +355,23 @@ EMAIL
         $this->assertCount(2, $fragments);
 
         $this->assertEquals('Thank you very much.', $email->getVisibleText());
+        $this->assertTrue($fragments[1]->isHidden());
+        $this->assertTrue($fragments[1]->isQuoted());
+    }
+
+    public function testCustomQuoteHeader3()
+    {
+        $regex   = $this->parser->getQuoteHeadersRegex();
+        $regex[] = '/^(De \: .+ .+someone\@yahoo.fr\.com.+)/ms';
+        $this->parser->setQuoteHeadersRegex($regex);
+
+        $email = $this->parser->parse($this->getFixtures('email_customer_quote_header_3.txt'));
+        $fragments = $email->getFragments();
+        $this->assertCount(2, $fragments);
+
+        $this->assertEquals("bonjour,
+je n'ai pas eu de retour sur ma précision..
+merci d'avance", $email->getVisibleText());
         $this->assertTrue($fragments[1]->isHidden());
         $this->assertTrue($fragments[1]->isQuoted());
     }
