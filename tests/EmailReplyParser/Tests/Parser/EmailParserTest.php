@@ -250,6 +250,16 @@ EMAIL
         $this->assertEquals(rtrim(implode("\n", $visibleFragments)), $email->getVisibleText());
     }
 
+
+
+    public function testEmailGmailNo()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_19.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+    }
+
     public function testReadsEmailWithCorrectSignature()
     {
         $email     = $this->parser->parse($this->getFixtures('correct_sig.txt'));
@@ -412,6 +422,7 @@ merci d'avance", $email->getVisibleText());
             array('在 2016年11月8日，下午2:23，Test user <test@example.com> 写道：'), // Chinese Apple Mail iPhone parsed html
             array('2016. 11. 8. 오후 12:39 Test user <test@example.com> 작성:'), // Korean Apple Mail iPhone
             array('2016/11/08 14:26、Test user <test@example.com> のメッセージ:'), // Japanese Apple Mail iPhone
+            array("tir. 18. apr. 2017 kl. 13:09 skrev Test user <test@example.com>:"), // Norwegian Gmail
         );
     }
 }
