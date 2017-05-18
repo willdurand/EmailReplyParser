@@ -1,5 +1,4 @@
 language: php
-language: php
 sudo: required
 dist: trusty
 group: edge
