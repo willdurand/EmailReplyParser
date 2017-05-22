@@ -138,7 +138,7 @@ EMAIL
         $email     = $this->parser->parse($this->getFixtures('email_6.txt'));
         $fragments = $email->getFragments();
 
-        $this->assertRegExp('/^I get/', (string) $fragments[0]);
+        $this->assertRegExp('/^On average/', (string) $fragments[0]);
         $this->assertRegExp('/^On/', (string) $fragments[1]);
         $this->assertRegExp('/Was this/', (string) $fragments[1]);
     }

@@ -29,11 +29,11 @@ class EmailParser
      * @var string[]
      */
     private $quoteHeadersRegex = array(
-        '/^\s*(On\s.+?wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
-        '/^\s*(Le\s.+?écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
-        '/^\s*(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
-        '/^\s*(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
-        '/^\s*(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
+        '/^\s*(?!On.*^\s*On\s.+?wrote:)(On\s.+?wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
+        '/^\s*(?!Le.*^\s*Le\s.+?écrit :)(Le\s.+?écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
+        '/^\s*(?!El.*^\s*El\s.+?escribió:)(El\s.+?escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
+        '/^\s*(?!Il.*^\s*Il\s.+?scritto:)(Il\s.+?scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
+        '/^\s*(?!Op.*^\s*Op\s.+?schreef.+:)(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
         '/^\s*((W\sdniu|Dnia)\s.+?(pisze|napisał(\(a\))?):)$/msu', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
         '/^\s*(Am\s.+\sum\s.+\sschrieb\s.+:)$/m', // Am DATE um TIME schrieb NAME:
