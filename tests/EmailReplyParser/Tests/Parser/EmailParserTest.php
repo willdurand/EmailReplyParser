@@ -384,6 +384,31 @@ merci d'avance", $email->getVisibleText());
         $this->assertTrue($fragments[1]->isQuoted());
     }
 
+    public function testVisibleTextSeemsLikeAQuoteHeader1()
+    {
+        $email = $this->parser->parse($this->getFixtures('email_19.txt'));
+        $fragments = $email->getFragments();
+        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
+        $this->assertRegexp('/^On Dec 16/', (string) $fragments[1]);
+        $this->assertRegExp('/Was this/', (string) $fragments[1]);
+    }
+
+    public function testVisibleTextSeemsLikeAQuoteHeader2()
+    {
+        $email = $this->parser->parse($this->getFixtures('email_20.txt'));
+        $fragments = $email->getFragments();
+        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
+        $this->assertRegexp('/^> On May 17/', (string) $fragments[1]);
+        $this->assertRegExp('/fix this parsing/', (string) $fragments[1]);
+    }
+
+    public function testEmailWithFairAmountOfContent()
+    {
+        $email = $this->parser->parse($this->getFixtures('email_21.txt'));
+        $fragments = $email->getFragments();
+        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
+    }
+
     /**
      * @dataProvider getDateFormats
      */
