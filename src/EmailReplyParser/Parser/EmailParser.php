@@ -41,10 +41,10 @@ class EmailParser
         '/^(20[0-9]{2}\..+\s작성:)$/m', // DATE TIME NAME 작성:
         '/^(20[0-9]{2}\/.+のメッセージ:)$/m', // DATE TIME、NAME のメッセージ:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
-        '/^\s*(From\s?:.+\s?([|<).+(]|>))/su', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
-        '/^\s*(De\s?:.+\s?([|<).+(]|>))/su', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)
-        '/^\s*(Van\s?:.+\s?([|<).+(]|>))/su', // "Van: NAME <EMAIL>" OR "Van : NAME <EMAIL>" OR "Van : NAME<EMAIL>"  (With support whitespace before start and before <)
-        '/^\s*(Da\s?:.+\s?([|<).+(]|>))/su', // "Da: NAME <EMAIL>" OR "Da : NAME <EMAIL>" OR "Da : NAME<EMAIL>"  (With support whitespace before start and before <)
+        '/^\s*(From\s?:.+\s?(\[|<).+(\]|>))/mu', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
+        '/^\s*(De\s?:.+\s?(\[|<).+(\]|>))/mu', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)
+        '/^\s*(Van\s?:.+\s?(\[|<).+(\]|>))/mu', // "Van: NAME <EMAIL>" OR "Van : NAME <EMAIL>" OR "Van : NAME<EMAIL>"  (With support whitespace before start and before <)
+        '/^\s*(Da\s?:.+\s?(\[|<).+(\]|>))/mu', // "Da: NAME <EMAIL>" OR "Da : NAME <EMAIL>" OR "Da : NAME<EMAIL>"  (With support whitespace before start and before <)
         '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[0-9]|[1-2][0-9]|3[01]|[1-9])\s[0-2]?[0-9]:\d{2}\s.+?:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 NAME <EMAIL>:
         '/^\s*([a-z]{3,4}\.\s.+\sskrev\s.+:)$/ms', // DATE skrev NAME <EMAIL>:
     );
