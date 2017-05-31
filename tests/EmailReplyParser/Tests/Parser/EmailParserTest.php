@@ -449,4 +449,29 @@ merci d'avance", $email->getVisibleText());
             array("tir. 18. apr. 2017 kl. 13:09 skrev Test user <test@example.com>:"), // Norwegian Gmail
         );
     }
+
+    /**
+     * @dataProvider getFromHeaders
+     */
+    public function testFromQuoteHeader($from)
+    {
+        $email = $this->parser->parse(str_replace('[FROM]', $from, $this->getFixtures('email_with_from_headers.txt')));
+        $fragments = $email->getFragments();
+        $this->assertSame(<<<CONTENT
+{$from}
+
+My email is <foo@example.com>
+CONTENT
+        , $fragments[1]->getContent());
+    }
+
+    public function getFromHeaders()
+    {
+        return array(
+            array('From: foo@example.com <foo@example.com>'),
+            array('De: foo@example.com <foo@example.com>'),
+            array('Van: foo@example.com <foo@example.com>'),
+            array('Da: foo@example.com <foo@example.com>'),
+        );
+    }
 }
