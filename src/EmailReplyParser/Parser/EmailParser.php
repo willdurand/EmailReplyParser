@@ -139,6 +139,18 @@ class EmailParser
 
         return $this;
     }
+    
+    /**
+     * @param string $regexp
+     *
+     * @return EmailParser
+     */
+    public function addQuoteHeadersRegex($regexp)
+    {
+        $this->quoteHeadersRegex[] = $regexp;
+
+        return $this;
+    }
 
     /**
      * @param FragmentDTO[] $fragmentDTOs
