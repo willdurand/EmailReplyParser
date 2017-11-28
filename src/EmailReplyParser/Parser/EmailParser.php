@@ -18,12 +18,14 @@ use EmailReplyParser\Fragment;
  */
 class EmailParser
 {
+    const QUOTE_REGEX = '/>+$/s';
+
     /**
      * Regex to match signatures
+     *
+     * @var string
      */
-    const SIG_REGEX   = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
-
-    const QUOTE_REGEX = '/>+$/s';
+    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
 
     /**
      * @var string[]
@@ -142,6 +144,28 @@ class EmailParser
     }
 
     /**
+     * @return string
+     * @since 2.7.0
+     */
+    public function getSignatureRegex()
+    {
+        return $this->signatureRegex;
+    }
+
+    /**
+     * @param string $signatureRegex
+     *
+     * @return EmailParser
+     * @since 2.7.0
+     */
+    public function setSignatureRegex($signatureRegex)
+    {
+        $this->signatureRegex = $signatureRegex;
+
+        return $this;
+    }
+
+    /**
      * @param FragmentDTO[] $fragmentDTOs
      *
      * @return Email
@@ -174,11 +198,12 @@ class EmailParser
 
     private function isSignature($line)
     {
-        return preg_match(static::SIG_REGEX, strrev($line)) ? true : false;
+        return preg_match($this->signatureRegex, strrev($line)) ? true : false;
     }
 
     /**
      * @param string $line
+     * @return bool
      */
     private function isQuote($line)
     {
@@ -191,8 +216,10 @@ class EmailParser
     }
 
     /**
+     * @param FragmentDTO $fragment
      * @param string  $line
      * @param boolean $isQuoted
+     * @return bool
      */
     private function isFragmentLine(FragmentDTO $fragment, $line, $isQuoted)
     {
