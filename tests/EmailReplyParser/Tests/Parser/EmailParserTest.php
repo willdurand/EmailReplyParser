@@ -411,6 +411,24 @@ merci d'avance", $email->getVisibleText());
     }
 
     /**
+     * override regexp, not to match too greedy signature.
+     *
+     * See: https://github.com/willdurand/EmailReplyParser/pull/42
+     */
+    public function testCustomSignatureRegex()
+    {
+        $signatureRegex = '/(?:^\s*--|^\s*__|^-- $)|(?:^Sent from my (?:\s*\w+){1,3})$/s';
+        $this->parser->setSignatureRegex($signatureRegex);
+        $email = $this->parser->parse($this->getFixtures('email_ls-l.txt'));
+        $fragments = $email->getFragments();
+
+        // this should match two blocks, body and a signature
+        $this->assertCount(2, $fragments);
+        $this->assertFalse($fragments[0]->isSignature());
+        $this->assertTrue($fragments[1]->isSignature());
+    }
+
+    /**
      * @dataProvider getDateFormats
      */
     public function testDateQuoteHeader($date)

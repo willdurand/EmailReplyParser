@@ -145,6 +145,7 @@ class EmailParser
 
     /**
      * @return string
+     * @since 2.7.0
      */
     public function getSignatureRegex()
     {
@@ -155,6 +156,7 @@ class EmailParser
      * @param string $signatureRegex
      *
      * @return EmailParser
+     * @since 2.7.0
      */
     public function setSignatureRegex($signatureRegex)
     {
