@@ -35,7 +35,7 @@ class EmailParser
         '/^\s*(Le(?:(?!^>*\s*Le\b|\bécrit:).){0,1000}écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
         '/^\s*(El(?:(?!^>*\s*El\b|\bescribió:).){0,1000}escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
         '/^\s*(Il(?:(?!^>*\s*Il\b|\bscritto:).){0,1000}scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
-        '/\S+ (написа(л|ла|в)+|wrote)+:/msu', // Everything before написал:
+        '/^[\S\s]+ (написа(л|ла|в)+|wrote)+:/msu', // Everything before написал:
         '/^\s*(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
         '/^\s*((W\sdniu|Dnia)\s.+?(pisze|napisał(\(a\))?):)$/msu', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
