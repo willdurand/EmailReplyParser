@@ -157,6 +157,13 @@ EMAIL
         $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
     }
 
+    public function testEmailUkrainian()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_23.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+    }
+
     public function testEmailSignatureWithEqual()
     {
         $email     = $this->parser->parse($this->getFixtures('email_9.txt'));
