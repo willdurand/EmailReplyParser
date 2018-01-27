@@ -85,14 +85,14 @@ class EmailParser
             }
 
             if ($fragment) {
-                $last = end($fragment->lines);
+                $first = reset($fragment->lines);
 
-                if ($this->isSignature($last)) {
+                if ($this->isSignature($first)) {
                     $fragment->isSignature = true;
                     $this->addFragment($fragment);
 
                     $fragment = null;
-                } elseif (empty($line) && $this->isQuoteHeader($last)) {
+                } elseif (empty($line) && $this->isQuoteHeader($first)) {
                     $fragment->isQuoted = true;
                     $this->addFragment($fragment);
 
