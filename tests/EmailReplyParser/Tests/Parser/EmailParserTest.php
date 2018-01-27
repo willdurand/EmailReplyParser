@@ -161,6 +161,7 @@ EMAIL
     {
         $email     = $this->parser->parse($this->getFixtures('email_23.txt'));
         $fragments = $email->getFragments();
+        $fragments[0] = str_replace("\nSomebody wrote:\n", '', $fragments[0]);
         $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
     }
 
