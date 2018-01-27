@@ -18,7 +18,7 @@ use EmailReplyParser\Fragment;
  */
 class EmailParser
 {
-    const QUOTE_REGEX = '/>+$/s';
+    const QUOTE_REGEX = '/^>+/s';
 
     /**
      * Regex to match signatures
@@ -67,7 +67,7 @@ class EmailParser
      */
     public function parse($text)
     {
-        $text = str_replace("\r\n", "\n", $text);
+        $text = str_replace(array("\r\n", "\r"), "\n", $text);
 
         foreach ($this->quoteHeadersRegex as $regex) {
             if (preg_match($regex, $text, $matches)) {
@@ -76,11 +76,12 @@ class EmailParser
         }
 
         $fragment = null;
-        foreach (explode("\n", strrev($text)) as $line) {
-            $line = rtrim($line, "\n");
+        $text_array = explode("\n", $text);
+        while (($line = array_pop($text_array)) !== NULL) {
+            $line = ltrim($line, "\n");
 
             if (!$this->isSignature($line)) {
-                $line = ltrim($line);
+                $line = rtrim($line);
             }
 
             if ($fragment) {
@@ -110,7 +111,7 @@ class EmailParser
                 $fragment->isQuoted = $isQuoted;
             }
 
-            $fragment->lines[] = $line;
+            array_unshift($fragment->lines, $line);
         }
 
         if ($fragment) {
@@ -174,9 +175,9 @@ class EmailParser
     protected function createEmail(array $fragmentDTOs)
     {
         $fragments = array();
-        foreach (array_reverse($fragmentDTOs) as $fragment) {
+        foreach ($fragmentDTOs as $fragment) {
             $fragments[] = new Fragment(
-                preg_replace("/^\n/", '', strrev(implode("\n", $fragment->lines))),
+                preg_replace("/^\n/", '', implode("\n", $fragment->lines)),
                 $fragment->isHidden,
                 $fragment->isSignature,
                 $fragment->isQuoted
@@ -189,7 +190,7 @@ class EmailParser
     private function isQuoteHeader($line)
     {
         foreach ($this->quoteHeadersRegex as $regex) {
-            if (preg_match($regex, strrev($line))) {
+            if (preg_match($regex, $line)) {
                 return true;
             }
         }
@@ -199,7 +200,7 @@ class EmailParser
 
     private function isSignature($line)
     {
-        return preg_match($this->signatureRegex, strrev($line)) ? true : false;
+        return preg_match($this->signatureRegex, $line) ? true : false;
     }
 
     /**
@@ -234,6 +235,6 @@ class EmailParser
             $fragment->isHidden = true;
         }
 
-        $this->fragments[] = $fragment;
+        array_unshift($this->fragments, $fragment);
     }
 }
