@@ -162,6 +162,21 @@ EMAIL
         $email     = $this->parser->parse($this->getFixtures('email_23.txt'));
         $fragments = $email->getFragments();
         $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
+
+        // Find flaw in original Ukrainian regex "/^[\S\s]+ (написа(л|ла|в)+|wrote)+:/msu"
+        $email     = $this->parser->parse($this->getFixtures('email_23_1.txt'));
+        $fragments = $email->getFragments();
+        $this->assertEquals(<<<EMAIL
+Fusce bibendum, quam hendrerit sagittis tempor, dui turpis tempus erat, pharetra sodales ante sem sit amet metus.
+Nulla malesuada, orci non vulputate lobortis, massa felis pharetra ex, convallis consectetur ex libero eget ante.
+Nam vel turpis posuere, rhoncus ligula in, venenatis orci. Duis interdum venenatis ex a rutrum.
+
+Something wrote:
+Duis ut libero eu lectus consequat consequat ut vel lorem. Vestibulum convallis lectus urna,
+et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh.
+
+EMAIL
+        , (string) $fragments[0]);
     }
 
     public function testEmailSignatureWithEqual()
