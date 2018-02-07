@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "William Durand",
-            "email": "william.durand1@gmail.com"
+            "email": "will+git@drnd.me"
         }
     ],
     "require": {
@@ -21,7 +21,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.7-dev"
+            "dev-master": "2.8-dev"
         }
     },
     "require-dev": {
