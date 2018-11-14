@@ -25,7 +25,7 @@ class EmailParser
      *
      * @var string
      */
-    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
+    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from (?:\s*\w+){1,5}$)|(?:^={30,}$)$/s';
 
     /**
      * @var string[]
@@ -44,6 +44,7 @@ class EmailParser
         '/^(20[0-9]{2}\..+\s작성:)$/m', // DATE TIME NAME 작성:
         '/^(20[0-9]{2}\/.+のメッセージ:)$/m', // DATE TIME、NAME のメッセージ:
         '/^(.+\s<.+>\sschrieb:)$/m', // NAME <EMAIL> schrieb:
+        '/^\s*(From\s?:.+\s?)/mui', // FROM: NAME, From: Name
         '/^\s*(From\s?:.+\s?(\[|<).+(\]|>))/mu', // "From: NAME <EMAIL>" OR "From : NAME <EMAIL>" OR "From : NAME<EMAIL>"(With support whitespace before start and before <)
         '/^\s*(发件人\s?:.+\s?(\[|<).+(\]|>))/mu', // "发件人: NAME <EMAIL>" OR "发件人 : NAME <EMAIL>" OR "发件人 : NAME<EMAIL>"(With support whitespace before start and before <)
         '/^\s*(De\s?:.+\s?(\[|<).+(\]|>))/mu', // "De: NAME <EMAIL>" OR "De : NAME <EMAIL>" OR "De : NAME<EMAIL>"  (With support whitespace before start and before <)
