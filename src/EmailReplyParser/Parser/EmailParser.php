@@ -25,7 +25,7 @@ class EmailParser
      *
      * @var string
      */
-    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from my (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
+    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from (my|Mail) (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
 
     /**
      * @var string[]
