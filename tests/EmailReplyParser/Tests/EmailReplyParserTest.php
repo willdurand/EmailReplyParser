@@ -72,6 +72,13 @@ EMAIL
         $this->assertEquals('Here is another email', EmailReplyParser::parseReply($body));
     }
 
+    public function testParseOutSentFromMailForWindows10()
+    {
+        $body = $this->getFixtures('email_w10_mail.txt');
+
+        $this->assertEquals("Great thanks Bort, going for a test now.\nBraxton", EmailReplyParser::parseReply($body));
+    }
+
     public function testParseOutSendFromMultiwordMobileDevice()
     {
         $body = $this->getFixtures('email_multi_word_sent_from_my_mobile_device.txt');
