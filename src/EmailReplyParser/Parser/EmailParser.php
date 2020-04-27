@@ -93,7 +93,7 @@ class EmailParser
                     $this->addFragment($fragment);
 
                     $fragment = null;
-                } elseif (empty($line) && $this->isQuoteHeader($first)) {
+                } elseif ($this->isQuoteHeader($first)) {
                     $fragment->isQuoted = true;
                     $this->addFragment($fragment);
 
