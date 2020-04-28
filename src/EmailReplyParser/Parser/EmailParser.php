@@ -30,7 +30,7 @@ class EmailParser
     /**
      * @var string[]
      */
-    private $quoteHeadersRegex = array(
+    private $quoteHeadersRegex = [
         '/^\s*(On(?:(?!^>*\s*On\b|\bwrote:).){0,1000}wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
         '/^\s*(Le(?:(?!^>*\s*Le\b|\bécrit:).){0,1000}écrit(\s|\xc2\xa0):)$/ms', // Le DATE, NAME <EMAIL> a écrit :
         '/^\s*(El(?:(?!^>*\s*El\b|\bescribió:).){0,1000}escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
@@ -51,12 +51,12 @@ class EmailParser
         '/^\s*(Da\s?:.+\s?(\[|<).+(\]|>))/mu', // "Da: NAME <EMAIL>" OR "Da : NAME <EMAIL>" OR "Da : NAME<EMAIL>"  (With support whitespace before start and before <)
         '/^(20[0-9]{2}\-(?:0?[1-9]|1[012])\-(?:0?[0-9]|[1-2][0-9]|3[01]|[1-9])\s[0-2]?[0-9]:\d{2}\s.+?:)$/ms', // 20YY-MM-DD HH:II GMT+01:00 NAME <EMAIL>:
         '/^\s*([a-z]{3,4}\.\s.+\sskrev\s.+:)$/ms', // DATE skrev NAME <EMAIL>:
-    );
+    ];
 
     /**
      * @var FragmentDTO[]
      */
-    private $fragments = array();
+    private $fragments = [];
 
     /**
      * Parse a text which represents an email and splits it into fragments.
@@ -67,7 +67,7 @@ class EmailParser
      */
     public function parse($text)
     {
-        $text = str_replace(array("\r\n", "\r"), "\n", $text);
+        $text = str_replace(["\r\n", "\r"], "\n", $text);
 
         foreach ($this->quoteHeadersRegex as $regex) {
             if (preg_match($regex, $text, $matches)) {
@@ -120,7 +120,7 @@ class EmailParser
 
         $email = $this->createEmail($this->fragments);
 
-        $this->fragments = array();
+        $this->fragments = [];
 
         return $email;
     }
@@ -174,7 +174,7 @@ class EmailParser
      */
     protected function createEmail(array $fragmentDTOs)
     {
-        $fragments = array();
+        $fragments = [];
         foreach ($fragmentDTOs as $fragment) {
             $fragments[] = new Fragment(
                 preg_replace("/^\n/", '', implode("\n", $fragment->lines)),

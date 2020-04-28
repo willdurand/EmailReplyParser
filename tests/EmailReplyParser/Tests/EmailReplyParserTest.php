@@ -2,6 +2,7 @@
 
 namespace EmailReplyParser\Tests;
 
+use EmailReplyParser\Email;
 use EmailReplyParser\EmailReplyParser;
 
 class EmailReplyParserTest extends TestCase
@@ -10,7 +11,7 @@ class EmailReplyParserTest extends TestCase
     {
         $email = EmailReplyParser::read(null);
 
-        $this->assertInstanceOf('EmailReplyParser\Email', $email);
+        $this->assertInstanceOf(Email::class, $email);
         $this->assertEmpty($email->getVisibleText());
     }
 
@@ -18,7 +19,7 @@ class EmailReplyParserTest extends TestCase
     {
         $email = EmailReplyParser::read('');
 
-        $this->assertInstanceOf('EmailReplyParser\Email', $email);
+        $this->assertInstanceOf(Email::class, $email);
         $this->assertEmpty($email->getVisibleText());
     }
 
