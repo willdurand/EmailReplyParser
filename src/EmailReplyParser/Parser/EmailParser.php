@@ -34,8 +34,9 @@ class EmailParser
         '/^\s*(On(?:(?!^>*\s*On\b|\bwrote:).){0,1000}wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
         '/^\s*(Le(?:(?!^>*\s*Le\b|\bécrit:).){0,1000}écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
         '/^\s*(El(?:(?!^>*\s*El\b|\bescribió:).){0,1000}escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
+        '/^\s*(El(?:(?!^>*\s*El\b|\bha escrit:).){0,1000}ha escrit:)$/ms', // El DATE, NAME <EMAIL> ha escrit:
         '/^\s*(Il(?:(?!^>*\s*Il\b|\bscritto:).){0,1000}scritto:)$/ms', // Il DATE, NAME <EMAIL> ha scritto:
-        '/^[\S\s]+ (написа(л|ла|в)+|wrote)+:/msu', // Everything before написал:
+        '/^[\S\s]+ (написа(л|ла|в)+)+:$/msu', // Everything before написал: not ending on wrote:
         '/^\s*(Op\s.+?schreef.+:)$/ms', // Il DATE, schreef NAME <EMAIL>:
         '/^\s*((W\sdniu|Dnia)\s.+?(pisze|napisał(\(a\))?):)$/msu', // W dniu DATE, NAME <EMAIL> pisze|napisał:
         '/^\s*(Den\s.+\sskrev\s.+:)$/m', // Den DATE skrev NAME <EMAIL>:
