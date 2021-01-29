@@ -31,6 +31,7 @@ class EmailParser
      * @var string[]
      */
     private $quoteHeadersRegex = array(
+        '/^\s*In a message dated .{8,1000} (writes|wrote):$/ms', // In a message dated DATE EMAIL writes/wrote:
         '/^\s*(On(?:(?!^>*\s*On\b|\bwrote:).){0,1000}wrote:)$/ms', // On DATE, NAME <EMAIL> wrote:
         '/^\s*(Le(?:(?!^>*\s*Le\b|\bécrit:).){0,1000}écrit :)$/ms', // Le DATE, NAME <EMAIL> a écrit :
         '/^\s*(El(?:(?!^>*\s*El\b|\bescribió:).){0,1000}escribió:)$/ms', // El DATE, NAME <EMAIL> escribió:
