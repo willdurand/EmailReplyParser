@@ -18,7 +18,7 @@ et mollis ligula rutrum quis. Fusce sed odio id arcu varius aliquet nec nec nibh
      */
     private $parser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->parser = new EmailParser();
     }
@@ -89,10 +89,10 @@ EMAIL
         $this->assertTrue($fragments[3]->isHidden());
         $this->assertTrue($fragments[4]->isHidden());
 
-        $this->assertRegExp('/^Oh thanks.\n\nHaving/', (string) $fragments[0]);
-        $this->assertRegExp('/^-A/', (string) $fragments[1]);
-        $this->assertRegExp('/^On [^\:]+\:/', (string) $fragments[2]);
-        $this->assertRegExp('/^_/', (string) $fragments[4]);
+        $this->assertMatchesRegularExpression('/^Oh thanks.\n\nHaving/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^-A/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^On [^\:]+\:/', (string) $fragments[2]);
+        $this->assertMatchesRegularExpression('/^_/', (string) $fragments[4]);
     }
 
     public function testReadsBottomPost()
@@ -102,10 +102,10 @@ EMAIL
 
         $this->assertCount(6, $fragments);
         $this->assertEquals('Hi,', (string) $fragments[0]);
-        $this->assertRegExp('/^On [^\:]+\:/', (string) $fragments[1]);
-        $this->assertRegExp('/^You can list/', (string) $fragments[2]);
-        $this->assertRegExp('/^>/', (string) $fragments[3]);
-        $this->assertRegExp('/^_/', (string) $fragments[5]);
+        $this->assertMatchesRegularExpression('/^On [^\:]+\:/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^You can list/', (string) $fragments[2]);
+        $this->assertMatchesRegularExpression('/^>/', (string) $fragments[3]);
+        $this->assertMatchesRegularExpression('/^_/', (string) $fragments[5]);
     }
 
     public function testRecognizesDateStringAboveQuote()
@@ -113,9 +113,9 @@ EMAIL
         $email     = $this->parser->parse($this->getFixtures('email_4.txt'));
         $fragments = $email->getFragments();
 
-        $this->assertRegExp('/^Awesome/', (string) $fragments[0]);
-        $this->assertRegExp('/^On/', (string) $fragments[1]);
-        $this->assertRegExp('/Loader/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^Awesome/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^On/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/Loader/', (string) $fragments[1]);
     }
 
     public function testDoesNotModifyInputString()
@@ -138,9 +138,9 @@ EMAIL
         $email     = $this->parser->parse($this->getFixtures('email_6.txt'));
         $fragments = $email->getFragments();
 
-        $this->assertRegExp('/^I get/', (string) $fragments[0]);
-        $this->assertRegExp('/^On/', (string) $fragments[1]);
-        $this->assertRegExp('/Was this/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^I get/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^On/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/Was this/', (string) $fragments[1]);
     }
 
     public function testEmailItalian()
@@ -289,7 +289,7 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertRegExp('/^--\nrick/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^--\nrick/', (string) $fragments[1]);
     }
 
     public function testReadsEmailWithSignatureWithNoEmptyLineAbove()
@@ -308,7 +308,7 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertRegExp('/^--\nrick/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^--\nrick/', (string) $fragments[1]);
     }
 
     public function testReadsEmailWithCorrectSignatureWithSpace()
@@ -330,7 +330,7 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertRegExp('/^-- \nrick/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^-- \nrick/', (string) $fragments[1]);
     }
 
     public function testReadsEmailWithCorrectSignatureWithNoEmptyLineWithSpace()
@@ -352,7 +352,7 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertRegExp('/^-- \nrick/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^-- \nrick/', (string) $fragments[1]);
     }
 
     public function testOneIsNotOn()
@@ -360,8 +360,8 @@ EMAIL
         $email     = $this->parser->parse($this->getFixtures('email_one_is_not_on.txt'));
         $fragments = $email->getFragments();
 
-        $this->assertRegExp('/One outstanding question/', (string) $fragments[0]);
-        $this->assertRegExp('/^On Oct 1, 2012/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/One outstanding question/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^On Oct 1, 2012/', (string) $fragments[1]);
     }
 
     public function testCustomQuoteHeader()
@@ -411,25 +411,25 @@ merci d'avance", $email->getVisibleText());
     {
         $email = $this->parser->parse($this->getFixtures('email_19.txt'));
         $fragments = $email->getFragments();
-        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
-        $this->assertRegexp('/^On Dec 16/', (string) $fragments[1]);
-        $this->assertRegExp('/Was this/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^On Thursday/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^On Dec 16/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/Was this/', (string) $fragments[1]);
     }
 
     public function testVisibleTextSeemsLikeAQuoteHeader2()
     {
         $email = $this->parser->parse($this->getFixtures('email_20.txt'));
         $fragments = $email->getFragments();
-        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
-        $this->assertRegexp('/^> On May 17/', (string) $fragments[1]);
-        $this->assertRegExp('/fix this parsing/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^On Thursday/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^> On May 17/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/fix this parsing/', (string) $fragments[1]);
     }
 
     public function testEmailWithFairAmountOfContent()
     {
         $email = $this->parser->parse($this->getFixtures('email_21.txt'));
         $fragments = $email->getFragments();
-        $this->assertRegexp('/^On Thursday/', (string) $fragments[0]);
+        $this->assertMatchesRegularExpression('/^On Thursday/', (string) $fragments[0]);
     }
 
     /**
