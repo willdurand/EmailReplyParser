@@ -297,7 +297,7 @@ EMAIL
         $this->assertFalse($fragments[0]->isHidden());
         $this->assertTrue($fragments[1]->isHidden());
 
-        $this->assertStringContains('/^--\nrick/', (string) $fragments[1]);
+        $this->assertMatchesRegularExpression('/^--\nrick/', (string) $fragments[1]);
     }
 
     public function testReadsEmailWithSignatureWithNoEmptyLineAbove()
