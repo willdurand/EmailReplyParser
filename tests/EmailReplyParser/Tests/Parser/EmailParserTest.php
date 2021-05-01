@@ -273,6 +273,22 @@ EMAIL
         $this->assertEquals(static::COMMON_FIRST_FRAGMENT, trim($fragments[0]));
     }
 
+    public function testEmailFreeZimbraFr()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_zimbra_free_fr.txt'));
+        $fragments = $email->getFragments();
+        $this->assertStringContainsString('Michael Scott', $fragments[0]);
+        $this->assertStringNotContainsString('Toby Flenderson', $fragments[0]);
+    }
+
+    public function testEmailFreeZimbraEn()
+    {
+        $email     = $this->parser->parse($this->getFixtures('email_zimbra_free_en.txt'));
+        $fragments = $email->getFragments();
+        $this->assertStringContainsString('Michael Scott', $fragments[0]);
+        $this->assertStringNotContainsString('Toby Flenderson', $fragments[0]);
+    }
+
     public function testReadsEmailWithCorrectSignature()
     {
         $email     = $this->parser->parse($this->getFixtures('correct_sig.txt'));
