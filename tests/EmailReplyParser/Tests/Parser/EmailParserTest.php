@@ -478,25 +478,25 @@ merci d'avance", $email->getVisibleText());
 
     public function getDateFormats()
     {
-        return array(
-            array('On Tue, 2011-03-01 at 18:02 +0530, Abhishek Kona wrote:'),
-            array('2014-03-20 8:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
-            array('2014-03-20 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
-            array('2014-03-09 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'), // Gmail
-            array('Le 19 mars 2014 10:37, Cédric Lombardot <cedric.lombardot@gmail.com> a écrit :'), // Gmail
-            array('El 19/03/2014 11:34, Juan Pérez <juan.perez@mailcatch.com> escribió:'), // Gmail in spanish
-            array('El 19/03/2014 11:34, Juan Pérez <juan.perez@mailcatch.com> ha escrit:'), // Gmail in catalan
-            array('W dniu 7 stycznia 2015 15:24 użytkownik Paweł Brzoski <pbrzoski91@gmail.com> napisał:'), //Gmail in polish
-            array('Le 19/03/2014 11:34, Georges du chemin a écrit :'), // Thunderbird
-            array('W dniu 2015-01-07 14:23, pbrzoski91@gmail.com pisze: '), // Thunderbird in polish
-            array('Den 08/06/2015 kl. 21.21 skrev Test user <test@example.com>:'), // Danish
-            array('Am 25.06.2015 um 10:55 schrieb Test user:'), // German 1
-            array('Test user <test@example.com> schrieb:'), // German 2
-            array('在 2016年11月8日，下午2:23，Test user <test@example.com> 写道：'), // Chinese Apple Mail iPhone parsed html
-            array('2016. 11. 8. 오후 12:39 Test user <test@example.com> 작성:'), // Korean Apple Mail iPhone
-            array('2016/11/08 14:26、Test user <test@example.com> のメッセージ:'), // Japanese Apple Mail iPhone
-            array("tir. 18. apr. 2017 kl. 13:09 skrev Test user <test@example.com>:"), // Norwegian Gmail
-        );
+        return [
+            ['On Tue, 2011-03-01 at 18:02 +0530, Abhishek Kona wrote:'],
+            ['2014-03-20 8:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'], // Gmail
+            ['2014-03-20 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'], // Gmail
+            ['2014-03-09 20:48 GMT+01:00 Rémi Dolan <do_not_reply@dolan.com>:'], // Gmail
+            ['Le 19 mars 2014 10:37, Cédric Lombardot <cedric.lombardot@gmail.com> a écrit :'], // Gmail
+            ['El 19/03/2014 11:34, Juan Pérez <juan.perez@mailcatch.com> escribió:'], // Gmail in spanish
+            ['El 19/03/2014 11:34, Juan Pérez <juan.perez@mailcatch.com> ha escrit:'], // Gmail in catalan
+            ['W dniu 7 stycznia 2015 15:24 użytkownik Paweł Brzoski <pbrzoski91@gmail.com> napisał:'], //Gmail in polish
+            ['Le 19/03/2014 11:34, Georges du chemin a écrit :'], // Thunderbird
+            ['W dniu 2015-01-07 14:23, pbrzoski91@gmail.com pisze: '], // Thunderbird in polish
+            ['Den 08/06/2015 kl. 21.21 skrev Test user <test@example.com>:'], // Danish
+            ['Am 25.06.2015 um 10:55 schrieb Test user:'], // German 1
+            ['Test user <test@example.com> schrieb:'], // German 2
+            ['在 2016年11月8日，下午2:23，Test user <test@example.com> 写道：'], // Chinese Apple Mail iPhone parsed html
+            ['2016. 11. 8. 오후 12:39 Test user <test@example.com> 작성:'], // Korean Apple Mail iPhone
+            ['2016/11/08 14:26、Test user <test@example.com> のメッセージ:'], // Japanese Apple Mail iPhone
+            ["tir. 18. apr. 2017 kl. 13:09 skrev Test user <test@example.com>:"], // Norwegian Gmail
+        ];
     }
 
     /**
@@ -516,11 +516,11 @@ CONTENT
 
     public function getFromHeaders()
     {
-        return array(
-            array('From: foo@example.com <foo@example.com>'),
-            array('De: foo@example.com <foo@example.com>'),
-            array('Van: foo@example.com <foo@example.com>'),
-            array('Da: foo@example.com <foo@example.com>'),
-        );
+        return [
+            ['From: foo@example.com <foo@example.com>'],
+            ['De: foo@example.com <foo@example.com>'],
+            ['Van: foo@example.com <foo@example.com>'],
+            ['Da: foo@example.com <foo@example.com>'],
+        ];
     }
 }

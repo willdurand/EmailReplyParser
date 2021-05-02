@@ -18,7 +18,7 @@ class FragmentDTO
     /**
      * @var string[]
      */
-    public $lines = array();
+    public $lines = [];
 
     /**
      * @var boolean

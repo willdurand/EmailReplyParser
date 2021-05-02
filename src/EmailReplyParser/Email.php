@@ -23,7 +23,7 @@ final class Email
     /**
      * @param Fragment[] $fragments
      */
-    public function __construct(array $fragments = array())
+    public function __construct(array $fragments = [])
     {
         $this->fragments = $fragments;
     }
