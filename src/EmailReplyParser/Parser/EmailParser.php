@@ -68,6 +68,10 @@ class EmailParser
      */
     public function parse($text)
     {
+        if (!is_string($text)) {
+            return new Email();
+        }
+
         $text = str_replace(array("\r\n", "\r"), "\n", $text);
 
         foreach ($this->quoteHeadersRegex as $regex) {

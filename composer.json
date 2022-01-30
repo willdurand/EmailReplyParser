@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3.0"
+        "php": ">=7.4.0"
     },
     "autoload": {
         "psr-4": { "EmailReplyParser\\": "src/EmailReplyParser" }
@@ -25,6 +25,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "symfony/phpunit-bridge": "^5.0"
     }
 }
