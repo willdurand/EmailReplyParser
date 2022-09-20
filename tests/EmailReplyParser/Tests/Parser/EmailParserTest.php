@@ -455,7 +455,10 @@ merci d'avance", $email->getVisibleText());
      */
     public function testCustomSignatureRegex()
     {
-        $signatureRegex = '/(?:^\s*--|^\s*__|^-- $)|(?:^Sent from my (?:\s*\w+){1,3})$/s';
+        $signatureRegex = [
+            '/^DOESNT_MATCH_ANYTHING$/',
+            '/(?:^\s*--|^\s*__|^-- $)|(?:^Sent from my (?:\s*\w+){1,3})$/s',
+        ];
         $this->parser->setSignatureRegex($signatureRegex);
         $email = $this->parser->parse($this->getFixtures('email_ls-l.txt'));
         $fragments = $email->getFragments();
