@@ -25,7 +25,10 @@ class EmailParser
      *
      * @var string
      */
-    private $signatureRegex = '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from (my|Mail) (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s';
+    private $signatureRegex = [
+        '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Sent from (my|Mail) (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s',
+        '/(?:^\s*--|^\s*__|^-\w|^-- $)|(?:^Verstuurd vanaf mijn (?:\s*\w+){1,4}$)|(?:^={30,}$)$/s',
+    ];
 
     /**
      * @var string[]
@@ -151,7 +154,7 @@ class EmailParser
     }
 
     /**
-     * @return string
+     * @return string[]
      * @since 2.7.0
      */
     public function getSignatureRegex()
@@ -160,12 +163,12 @@ class EmailParser
     }
 
     /**
-     * @param string $signatureRegex
+     * @param string[] $signatureRegex
      *
      * @return EmailParser
      * @since 2.7.0
      */
-    public function setSignatureRegex($signatureRegex)
+    public function setSignatureRegex(array $signatureRegex)
     {
         $this->signatureRegex = $signatureRegex;
 
@@ -205,7 +208,13 @@ class EmailParser
 
     private function isSignature($line)
     {
-        return preg_match($this->signatureRegex, $line) ? true : false;
+        foreach ($this->signatureRegex as $regex) {
+            if (preg_match($regex, $line)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
